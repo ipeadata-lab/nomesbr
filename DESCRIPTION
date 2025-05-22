@@ -36,6 +36,7 @@ LazyData: true
 RoxygenNote: 7.3.2
 Imports:
     data.table,
+    httr,
     stringr
 Suggests:
     tictoc,
