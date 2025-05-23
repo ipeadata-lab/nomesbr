@@ -36,7 +36,9 @@ LazyData: true
 RoxygenNote: 7.3.2
 Imports:
     data.table,
+    dplyr,
     httr,
+    stringi,
     stringr
 Suggests:
     tictoc,
@@ -45,3 +47,4 @@ Suggests:
     rmarkdown
 Depends:
     R (>= 4.3.0)
+Config/testthat/edition: 3

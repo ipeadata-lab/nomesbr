@@ -1,6 +1,6 @@
 #' @keywords internal
-limpa_espaco_acento_tio_apostrofe <- function(c) {
-  if(class(c) != 'character') stop('c must be a character vector')
+limpa_espaco_acento_til_apostrofe <- function(c) {
+  if(!inherits(c, 'character')) stop('c must be a character vector')
   c <- c |> 
     stringr::str_replace(regex_cAO, "\\1AO\\2") |>
     stringr::str_replace(regex__AO, "\\1CAO\\2") |> 
@@ -15,14 +15,3 @@ limpa_espaco_acento_tio_apostrofe <- function(c) {
   return(c)
 }
 
-
-#' @keywords internal
-spaced_word <-  \(x) {
-  # Divide a string em caracteres individuais
-  chars <- strsplit(x, "")[[1]]
-  
-  # Junta os caracteres com a expressão regex que permite 0 ou mais espaços entre eles
-  regexp_string <- paste(chars, collapse = "\\s{0,}")
-  
-  return(regexp_string)
-}

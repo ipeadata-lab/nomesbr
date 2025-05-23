@@ -1,14 +1,14 @@
-#' Obtém o dataset nomes_proprios_compostos, baixando-o se necessário
+#' Recupera o dataset nomes_proprios_compostos, baixando-o se necessário
 #'
-#' Esta função verifica se o dataset nomes_proprios_compostos existe em um diretório de cache local.
-#' Se não existir, baixa-o de um release do GitHub e o salva no cache.
+#' Verifica se o dataset nomes_proprios_compostos existe em uma pasta de cache local.
+#' Se inexistir, baixa-o de um release do GitHub e o salva no cache.
 #'
 #' @return Um data.table contendo os dados de nomes_proprios_compostos.
 #' @keywords internal
 #' @importFrom tools R_user_dir
 #' @importFrom utils download.file
 #' @importFrom data.table fread
-get_nomes_proprios_compostos_data <- function() {
+obter_dic_nomes_proprios_compostos <- function() {
   pkg_name <- "nomesbr" 
   cache_dir <- tools::R_user_dir(package = pkg_name, which = "cache")
   nomes_proprios_compostos_file_path <- file.path(cache_dir, "nomes_proprios_compostos.rds")
@@ -22,7 +22,7 @@ get_nomes_proprios_compostos_data <- function() {
       dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
     }
     message(paste0("Baixando o arquivo de dados nomes_proprios_compostos.rds (aprox. 109MB).\n",
-                   "Isso acontecerá apenas uma vez.\n",
+                   "Isso vai acontecer apenas uma vez.\n",
                    "Salvando em: ", nomes_proprios_compostos_file_path))
     tryCatch({
       # Usar tempfile para download seguro
@@ -30,14 +30,14 @@ get_nomes_proprios_compostos_data <- function() {
       
       # Usando httr para mais controle e robustez (requer httr em Imports ou Suggests)
       if (!requireNamespace("httr", quietly = TRUE)) {
-        stop("O pacote 'httr' é necessário para baixar os dados. Por favor, instale-o.", call. = FALSE)
+        stop("Necessita-se do pacote 'httr' para baixar os dados. Por favor, instale-o.", call. = FALSE)
       }
       resp <- httr::GET(nomes_proprios_compostos_url, httr::write_disk(temp_file, overwrite = TRUE), httr::progress())
       httr::stop_for_status(resp) # Verifica se o download foi bem-sucedido
       
       # Mover o arquivo baixado para o local de cache
       file.rename(temp_file, nomes_proprios_compostos_file_path)
-      message("Download concluído.")
+      message("Download finalizado.")
     }, error = function(e) {
       stop(paste0("Falha ao baixar o arquivo nomes_proprios_compostos.rds de ", nomes_proprios_compostos_url, "\nErro: ", e$message), call. = FALSE)
     })

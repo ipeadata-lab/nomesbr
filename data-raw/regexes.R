@@ -361,3 +361,6 @@ usethis::use_data(
   regex_LETRA_IN_REPETIDA,
   internal= TRUE, overwrite = TRUE
 )
+
+# Limpar o ambiente do script data-raw
+rm(list = ls())
