@@ -17,7 +17,7 @@ algorithm.)
 
 ## Instalação
 
-A versão em desenvolvimento pode ser instalada com o seguinte comando:
+A versão em desenvolvimento pode ser instalada com o seguinte comando :
 
 ``` r
 # install.packages("remotes")

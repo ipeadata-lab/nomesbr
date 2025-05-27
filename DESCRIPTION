@@ -37,11 +37,10 @@ RoxygenNote: 7.3.2
 Imports:
     data.table,
     dplyr,
-    httr,
-    stringi,
-    stringr
+    httr2,
+    stringr,
+    tictoc
 Suggests:
-    tictoc,
     testthat (>= 3.0.0),
     knitr,
     rmarkdown

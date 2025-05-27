@@ -7,6 +7,7 @@
 #' @keywords internal
 #' @importFrom tools R_user_dir
 #' @importFrom utils download.file
+#' @importFrom httr2 request req_perform resp_body_raw req_retry req_error req_user_agent req_progress
 #' @importFrom data.table fread
 obter_dic_nomes_proprios_compostos <- function() {
   pkg_name <- "nomesbr" 
@@ -24,29 +25,68 @@ obter_dic_nomes_proprios_compostos <- function() {
     message(paste0("Baixando o arquivo de dados nomes_proprios_compostos.rds (aprox. 109MB).\n",
                    "Isso vai acontecer apenas uma vez.\n",
                    "Salvando em: ", nomes_proprios_compostos_file_path))
+    
+    # Construir a requisição com httr2
+    req <- httr2::request(nomes_proprios_compostos_url) |>
+      httr2::req_user_agent(paste0(pkg_name, " (https://github.com/ipeadata-lab/nomesbr)")) 
+    
+    # Adicionar autenticação se GITHUB_PAT estiver disponível
+    github_token <- Sys.getenv("GITHUB_PAT")
+    if (nzchar(github_token)) { # nzchar verifica se a string não é vazia
+      message("Usando GITHUB_PAT para autenticar.")
+      req <- req |> httr2::req_auth_bearer_token(github_token)
+    } else {
+      message("Nenhum GITHUB_PAT encontrado. Tentando download publicamente.")
+    }
+    
+    req <- req|>
+      httr2::req_retry(max_tries = 3, is_transient = \(resp) httr2::resp_status(resp) %in% c(401,403,404,429, 500, 502, 503, 504)) |> # Tentar novamente em caso de falhas temporárias
+      httr2::req_error(is_error = function(resp) FALSE) # Lidar com erros manualmente abaixo
+    
+    # Usar tempfile para download seguro
+    temp_file <- tempfile(fileext = ".rds")
+
     tryCatch({
-      # Usar tempfile para download seguro
-      temp_file <- tempfile(fileext = ".rds")
+      # Performar a requisição e salvar o corpo diretamente em um arquivo
+      # req_perform_disk foi considerado, mas para salvar como RDS, melhor ler o corpo e escrever
+      # httr2::req_perform(req, path = temp_file) # Isso salvaria o corpo diretamente
       
-      # Usando httr para mais controle e robustez (requer httr em Imports ou Suggests)
-      if (!requireNamespace("httr", quietly = TRUE)) {
-        stop("Necessita-se do pacote 'httr' para baixar os dados. Por favor, instale-o.", call. = FALSE)
+      message("Iniciando download...")
+      resp <- httr2::req_perform(req) # verbosity = 0 para httr2::req_progress funcionar
+      
+      # Verificar se o request foi bem sucedido (status 2xx)
+      if (httr2::resp_is_error(resp)) {
+        httr2::resp_check_status(resp) # Isso vai gerar um erro com detalhes
       }
-      resp <- httr::GET(nomes_proprios_compostos_url, httr::write_disk(temp_file, overwrite = TRUE), httr::progress())
-      httr::stop_for_status(resp) # Verifica se o download foi bem-sucedido
+      
+      # Salvar o corpo da resposta (binário) no arquivo temporário
+      # writeBin garante que o conteúdo seja escrito como está
+      writeBin(httr2::resp_body_raw(resp), temp_file)
       
       # Mover o arquivo baixado para o local de cache
-      file.rename(temp_file, nomes_proprios_compostos_file_path)
-      message("Download finalizado.")
+      # file.rename pode falhar entre diferentes dispositivos/sistemas de arquivos
+      # file.copy é mais robusto, depois remove o original
+      if (file.copy(temp_file, nomes_proprios_compostos_file_path, overwrite = TRUE)) {
+        file.remove(temp_file)
+        message("Download finalizado e arquivo salvo no cache.")
+      } else {
+        file.remove(temp_file) # Remove o temp_file mesmo se a cópia falhar
+        stop("Falha ao mover o arquivo baixado para a pasta de cache.", call. = FALSE)
+      }
     }, error = function(e) {
+      # Limpar o arquivo temporário em caso de erro
+      if (file.exists(temp_file)) {
+        file.remove(temp_file)
+      }
       stop(paste0("Falha ao baixar o arquivo nomes_proprios_compostos.rds de ", nomes_proprios_compostos_url, "\nErro: ", e$message), call. = FALSE)
     })
   } else {
+    
     message(paste0("Usando arquivo nomes_proprios_compostos.rds do cache: ", nomes_proprios_compostos_file_path))
   }
   
   # Ler o arquivo RDS
-  nomes_proprios_compostos_data <- readRDS(nomes_proprios_compostos_file_path)
+  nomes_proprios_compostos_data <- data.table::fread(nomes_proprios_compostos_file_path)
   
   
   return(nomes_proprios_compostos_data)

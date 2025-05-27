@@ -291,6 +291,33 @@ dicionario_marcas_ignorados <- c(
 regex_IGNORADO <- paste0(dicionario_marcas_ignorados,collapse = "|")
 
 
+###regex ignorado regra substituição
+regex_ignorados_subst <- c(
+  "^$", # vazio
+  "^.$", # caractere único
+  "DES\\s?CONHEC\\S+\\b",
+  "\\bINDETER\\S+\\b", # indeter + caractere não espaço - evita ex. Lindeter Maria...
+  "\\bINE[XS]IST\\S+\\b", #inexistente inesistente
+  "[^DS]IN*G[OUI]*NORA[DRAOS]*\\b", #IGNORADA INGONORADO E VARIANTES
+  
+  # RETIRADO - grepl("AUSENT",no_pessoa),.(no_pessoa,nome_cpf) - 11 CASOS 9 validados com nome cpf, 2 NA
+  #"AUSENT",
+  
+  # omitido, se omite
+  ## AJUSTADO PARA EVITAR - omiterio, comite, domitilde, domitilia, jacomite etc 
+  ## Problema OMITE como nome, OMITI como último sobrenome - menor caso DARCI OMITI
+  ##separar
+  ## 1 OMITE + VARIAÇÕES QUE NÃO PRIMEIRO NOME Efetivo- menor caso OMITE DOS SANTOS LIMA
+  "\\bOMIT[E]\\b",
+  ## 2 OMITI + VARIAÇÕES
+  "\\bOMIT[I]D?[AO]?\\b"
+  
+  
+  
+)
+
+regex_IGNORADO_subst <- paste0(regex_ignorados_subst,collapse = "|")
+
 ## algumas patentes/cargos
 
 regex_DR_CORONEL <- c(
@@ -326,7 +353,6 @@ repvalidas <-
 regex_LETRA_IN_REPETIDA <-  paste0("\\b",repvalidas,"([A-Z])\\1+")
 
 
-
 usethis::use_data(
   NA_nao, NA_nao2, NA_nada, NA_nada2, NA_sem, NA_nao_nada_sem, NA_nao_nada_sem2,
   regex_cAO, regex__AO, regex_J_AO, regex_apostrofe, regex_d_vogal_candidato_apostrofo,
@@ -354,7 +380,7 @@ usethis::use_data(
   regex_nome_XEDADEDOS, regex_nome_XEDADEDOS_allowed, regex_nome_XEDADEDOS_replace,
   regex_EDADEDOS_ajuste, regex_DEDEDADA,
   regex_SR_SRA,
-  dicionario_marcas_ignorados, regex_IGNORADO,
+  dicionario_marcas_ignorados, regex_IGNORADO,regex_IGNORADO_subst,
   regex_DR_CORONEL,
   regex_TESTE,
   repeticoes_validas,repvalidas,

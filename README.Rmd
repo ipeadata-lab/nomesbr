@@ -31,7 +31,7 @@ custom variation of the metaphoneBR algorithm.)
 
 
 A versão em desenvolvimento pode ser instalada com
-o seguinte comando:
+o seguinte comando :
 
 ```r
 # install.packages("remotes")
@@ -39,6 +39,7 @@ remotes::install_github("ipeadata-lab/nomesbr")
 ```
 
 ## Utilização
+
 
 
 ## Nota <a href="https://www.ipea.gov.br"><img src="man/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>
