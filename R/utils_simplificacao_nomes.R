@@ -50,7 +50,7 @@ add_string_w1_w2_w3_and_w2p <- segmentar_nomes
 #' @import data.table
 #' @importFrom stringr str_detect
 identificar_adicionar_nome_proprio <- function(dt, s) {
-  np2 <- obter_dic_nomes_proprios_compostos()
+  np2 <- readRDS(obter_dic_nomes_proprios_compostos())
   # Build dt key names
   s1     <- paste0(s, "1")
   s2p    <- paste0(s, "2p")

@@ -75,9 +75,6 @@ obter_dic_nomes_proprios_compostos <- function() {
     message(paste0("Usando arquivo nomes_proprios_compostos.rds do cache: ", nomes_proprios_compostos_file_path))
   }
   
-  # Ler o arquivo RDS
-  nomes_proprios_compostos_data <- readRDS(nomes_proprios_compostos_file_path)
-  
-  
-  return(nomes_proprios_compostos_data)
+
+  return(nomes_proprios_compostos_file_path)
 }
