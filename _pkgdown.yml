@@ -1,0 +1,8 @@
+url: https://ipeadata-lab.github.io/nomesbr/
+template:
+  bootstrap: 5
+  light-switch: true
+
+development:
+  mode: auto
+
