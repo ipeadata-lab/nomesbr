@@ -5,15 +5,11 @@
 para auxiliar no pareamento de banco de dados na ausência de chaves
 únicas não ambíguas. Detecta e corrige erros tipográficos mais comuns,
 simplifica opcionalmente termos sujeitos eventualmente a omissão em
-cadastros, e simplifica foneticamente suas palavras, aplicando variação
-própria do algoritmo metaphoneBR.
+cadastros, e simplifica .
 
-R package for tidying and simplifying phonetically brazilian names using
-a custom metaphoneBR algorithm. Created for aiding in dataset pairing in
-the absence of unambiguous keys. It detects and corrects common typos,
-optionally simplifies terms prone to omission in records, and applies
-phonetic simplification using a custom variation of the metaphoneBR
-algorithm.)
+(R package for tidying and simplifying. Created for aiding in dataset
+pairing in the absence of unambiguous keys. It detects and corrects
+common typos, optionally simplifies terms prone to omission in records.)
 
 ## Instalação
 

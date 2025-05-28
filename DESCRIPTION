@@ -47,3 +47,6 @@ Suggests:
 Depends:
     R (>= 4.3.0)
 Config/testthat/edition: 3
+URL: https://github.com/ipeadata-lab/nomesbr
+BugReports: https://github.com/ipeadata-lab/nomesbr/issues
+VignetteBuilder: knitr

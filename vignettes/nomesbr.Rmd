@@ -1,15 +1,18 @@
 ---
-output: github_document
+title: "nomesbr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{nomesbr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-"
+  comment = "#>"
 )
 ```
-
 ## nomesbr
 
 **nomesbr** é um pacote de R que limpa e simplifica nomes de pessoas para 
@@ -23,20 +26,9 @@ the absence of unambiguous keys.
 It detects and corrects common typos, optionally simplifies terms prone 
 to omission in records.)
 
-## Instalação
-
-
-
-A versão em desenvolvimento pode ser instalada com
-o seguinte comando :
-
-```r
-# install.packages("remotes")
-remotes::install_github("ipeadata-lab/nomesbr")
+```{r setup}
+library(nomesbr)
 ```
-
-## Utilização
-
 
 
 ## Nota <a href="https://www.ipea.gov.br"><img src="man/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>

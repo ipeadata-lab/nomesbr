@@ -4,3 +4,8 @@
 ^data-raw$
 ^cran-comments\.md$
 ^LICENSE\.md$
+^doc$
+^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
