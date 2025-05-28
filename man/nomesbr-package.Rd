@@ -4,9 +4,18 @@
 \name{nomesbr-package}
 \alias{nomesbr}
 \alias{nomesbr-package}
-\title{nomesbr: Limpador e simplificador fonético de nomes de pessoas (Person name cleaner and simplifier)}
+\title{nomesbr: Limpador e simplificador de nomes de pessoas (Person name cleaner and simplifier)}
 \description{
 Limpa e simplifica nomes de pessoas para auxiliar no pareamento de banco de dados na ausência de chaves únicas não ambíguas. Detecta e corrige erros tipográficos mais comuns, simplifica opcionalmente termos sujeitos eventualmente a omissão em cadastros, e simplifica foneticamente suas palavras, aplicando variação própria do algoritmo metaphoneBR. (Cleans and simplifies personal names to assist in database matching when unambiguous unique keys are unavailable. Detects and corrects common typos, optionally simplifies terms prone to omission in records, and applies phonetic simplification using a custom variation of the metaphoneBR algorithm.)
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ipeadata-lab/nomesbr}
+  \item \url{https://ipeadata-lab.github.io/nomesbr/}
+  \item Report bugs at \url{https://github.com/ipeadata-lab/nomesbr/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Rodrigo Borges \email{rodrigoesborges@gmail.com} (\href{https://orcid.org/0000-0003-2076-1424}{ORCID})
