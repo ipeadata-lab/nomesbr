@@ -23,5 +23,6 @@ test_that("remove_PARTICULAS_AGNOMES funciona", {
 
 
 #Teste para função de download de dado nomes_proprios_data
-#test_that("obter_dic_nomes_proprios_compostos funciona",
-#          inherits(obter_dic_nomes_proprios_compostos(),'data.frame'))
+test_that("obter_dic_nomes_proprios_compostos funciona",
+          expect_true(grepl("cache/R/nomesbr/nomes_proprios_compostos.rds",obter_dic_nomes_proprios_compostos()))
+)

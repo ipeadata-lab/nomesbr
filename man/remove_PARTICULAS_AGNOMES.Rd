@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils_simplificacao_nomes.R
 \name{remove_PARTICULAS_AGNOMES}
 \alias{remove_PARTICULAS_AGNOMES}
-\title{Remove Partículas e Agnomes de Nomes}
+\title{Remove Partículas, Agnomes e algumas Patentes de Nomes}
 \usage{
 remove_PARTICULAS_AGNOMES(s)
 }
@@ -13,5 +13,5 @@ remove_PARTICULAS_AGNOMES(s)
 Vetor de caracteres com nomes simplificados.
 }
 \description{
-Remove Partículas e Agnomes de Nomes
+Remove Partículas, Agnomes e algumas Patentes de Nomes
 }

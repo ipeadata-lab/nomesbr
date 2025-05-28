@@ -37,7 +37,6 @@ A função executa os seguintes passos principais:
   \item Corrige E, DA, DE e variantes com caracter prévio indevido (ex: "EDAS" para "DAS" se aplicável).
   \item Remove saudações como "SR.", "SRA.".
   \item Remove termos como "IGNORADO", "DESCONHECIDO".
-  \item Remove títulos específicos como "DOUTOR", "CORONEL".
   \item Remove repetições de partículas de ligação (ex: "DE DE").
   \item Limpa letras repetidas no início ou meio de palavras.
 }

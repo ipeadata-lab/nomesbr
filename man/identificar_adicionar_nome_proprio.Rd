@@ -3,7 +3,7 @@
 \name{identificar_adicionar_nome_proprio}
 \alias{identificar_adicionar_nome_proprio}
 \alias{add_nome_proprio_to_word1_and_word2p}
-\title{Adiciona Nome Próprio Validado com Base em `np2`}
+\title{Adiciona Nome Próprio Validado com Base em `nomes_proprios_compostos` `np2`}
 \usage{
 identificar_adicionar_nome_proprio(dt, s)
 
@@ -18,5 +18,5 @@ add_nome_proprio_to_word1_and_word2p(dt, s)
 O `data.table` `dt` com colunas `_v2` adicionadas.
 }
 \description{
-Adiciona Nome Próprio Validado com Base em `np2`
+Adiciona Nome Próprio Validado com Base em `nomes_proprios_compostos` `np2`
 }
