@@ -1,11 +1,11 @@
-##Todas as definições de REGEX na mesma ordem da rotina original
+##Todas os REGEX definidos na mesma ordem da rotina original
 
-#Provisório - pequena função usada para criar um dos regexes
+#Provisoriamente - pequena ferramenta usada para criar um dos regexes
 spaced_word <-  \(x) {
   # Divide a string em caracteres individuais
   chars <- strsplit(x, "")[[1]]
   
-  # Junta os caracteres com a expressão regex que permite 0 ou mais espaços entre eles
+  # Junta os caracteres com a regex que permite 0 ou mais ' ' entre eles
   regexp_string <- paste(chars, collapse = "\\s{0,}")
   
   return(regexp_string)
@@ -40,10 +40,10 @@ regex__AO <- '(CO[NM]CEI|CON EI|INI?FORMA|IDENTIFICA|AU?NUNCIA|ASS?UMP?|ASSUN|AN
 regex_J_AO <- '(^| )J AO( |$)'
 regex_apostrofe <- "\\bSANT AN+A|\\bD AR[CK]|\\bD AVIL+A|\\bD ANGELO|\\bD ALESSANDR|\\bD AQUINO|\\bD AMICO|\\bD AMICO|\\bD OR|\\bD A(G|CQ)UA|\\bD [AOE]S?\\b"
 regex_d_vogal_candidato_apostrofo <- "\\bD ([AEIOU]\\w{3,})\\b"
-##outros casos com elevadíssima confiança do d separado por apostrofe ou erro tipografico no cadastro ex D ENADAI quando DENADAI - verificado com screening de todas as junções d e\w{3,} 
+##outros casos com muito alta confiabilidade do d separado por apostrofe ou erro tipografico no cadastro ex D ENADAI quando DENADAI - verificado com screening de todas as possibilidades juntas  d e\w{3,} 
 regex_d_e_pos <- "(CC|CH|CLAR|GM|LAQ|LBO|LEUT|LLY|MM|NADAI|PIR|RC|RAS|RRI|SCONHECI|SP|SQ|STE|TT|U|VAN|VE|X|Z)"
 regex_d_e_apostrofo <- paste0("\\bD E(?=",regex_d_e_pos,")")
-## erros tipograficos como D ELIMA - padrão parecido com limpa acento/apostrofo
+## erros tipograficos como D ELIMA - parecido com limpa acento/apostrofo
 regex_d_e_falsopositivo_apostrofo_melhora_sobrenome <- gsub("=","!",regex_d_e_apostrofo)
 regex_d_a_falso <- "(CONCE|COSTA|CRUZ|CUNHA|FONSECA|ISLVA|IVLA|LCERDA|LIMA|MATA|MOTA|OCN|PAIXAO|PAZ\\b|PENHA|ROCHA|SIALVA|SILV|SIV|SLV)"
 regex_d_a_apostrofo <- paste0("\\bD A(?!",regex_d_a_falso,")")
@@ -146,26 +146,6 @@ regex_paimae_desconhecido     <- '^$|^NAO |\\bNAO(\\s|$)|IGNORAD[AO]|(NAO|NADA) 
 
 
 
-#Testing
-#str_detect('NAO COSTA NO TERMO',regex_NADA_NAO_CONSTA2)
-# str_detect('MARINILDA DOS SANTOS SILVA FALECIDA',regex_FALECIDO)
-# str_detect('E FALECIDA',regex_FALECIDO)
-# str_detect('FALECIDA E',regex_FALECIDO)
-# str_detect('FALECIDA',regex_FALECIDO)
-# str_detect('FALECIDA DESCONHECIDA',regex_FALECIDO)
-# str_detect('INFORMADO COMO FALECIDO NO CADASTRO',regex_FALECIDO)
-# str_remove('RAIMUNDO EDILSON ALVES DO NASCIMENTO FALECIDO',regex_nome_FALECIDO)
-# str_remove('RAIMUNDO EDILSON ALVES DO NASCIMENTO JA FALECIDO',regex_nome_FALECIDO)
-# str_remove('TEREZA JOSEFA DO NASCIMENTOFALECIDA',regex_nome_FALECIDO)
-# str_detect('DILVANA CRISTINA DOS SANTOS FALECIDA I',regex_FALECIDO2)
-# str_detect('MARINILDA DOS SANTOS SILVA FALECIDA',regex_FALECIDO2)
-# str_detect('LUCAS PAI DA SILVA',regex_nome_aceito)
-# str_remove('CARTORIO DE REGISTRO CIVIL',regex_CARTORIO)
-# str_detect(c('HILDA ORO NAO','HILDA ORO NAO JAPA','REINALDO OROI NAO'),regex_nome_aceito)
-# str_replace('RAIMUNDO FELIX PAI XAO A','PAI XAO','PAIXAO')
-# str_detect('MARIA APARECIDA DA DA CUNHA OLIVEIRA OBS A MAE NAO MORA COM OS FILHOS',regex_naoMora)
-# str_detect('DILVAN DOS SANTOS NAO MORA',regex_naoMora)
-#names <- c("JOÃO DA SILVA", "MARIA DE SOUZA", "JOSÉ DOS SANTOS", "ANA PAULA DO CARMO", "CARLOS EDUARDO DAS NEVES", "LUÍSA E SILVA","LUÍSA DE SILVA")
 
 
 
@@ -202,16 +182,6 @@ NA_const_cadast_decl_inf_reg2 <- paste0('^(',NA_consta2,'|',NA_cadastr,'|',NA_de
 NA_orig         <- c(NA_consta,NA_cadastrado,NA_declarado,NA_informado,NA_registro)
 
 
-#testing
-#DT <- data.table(x=NA_orig)
-#DT[,x_NA:=ifelse(       str_detect(x,NA_const_cadast_decl_inf_reg ),1,
-#                 ifelse(str_detect(x,NA_const_cadast_decl_inf_reg2),1,0))]
-#print(DT)
-#NA_nada_nao_consta  <- outer(NA_nada_nao, NA_consta    , paste, sep = " ") |> as.vector()
-#NA_nada_nao_cadast  <- outer(NA_nada_nao, NA_cadastrado, paste, sep = " ") |> as.vector()
-#NA_nada_nao_declar  <- outer(NA_nada_nao, NA_declarado , paste, sep = " ") |> as.vector()
-#NA_nada_nao_inform  <- outer(NA_nada_nao, NA_informado , paste, sep = " ") |> as.vector()
-#NA_nada_nao_regist  <- outer(NA_nada_nao, NA_registro  , paste, sep = " ") |> as.vector()
 
 
 #FOI|NA|NO|EM|A|O
@@ -238,23 +208,11 @@ regex_nome_XEDADEDOS_replace  <- "(\\s+)[BCDFGHJLNMPRSVQW](D[EAO]S?)(\\s+)"
 regex_EDADEDOS_ajuste <- gsub("^\\\\s\\+","",regex_nome_EDADEDOS)
 regex_DEDEDADA <- paste0('\\b(',regex_EDADEDOS_ajuste,'|D\\s+)(',regex_EDADEDOS_ajuste,'|D\\b)')
 
-#Testing
-# str_detect('A DE SA',regex_nome_XEDADEDOS)
-# str_detect('A DE de SA',regex_nome_XEDADEDOS_allowed)
-# d <- data.table(s=c('A DE SA','A DDE SA'))
-# d[, Xartigo :=  str_detect(s, regex_nome_XEDADEDOS) &
-#     !str_detect(s, regex_nome_XEDADEDOS_allowed)]
-# d[Xartigo==1, s2 := str_replace(s, regex_nome_XEDADEDOS_replace, "\\1\\2\\3")]
-# 
-#c('IGUINORADO','IGINORADO','PAI INGNORADO','INGORADO','IGNRADO','IGN IGN','PAI INGUINORADO','DESCONHECIDA','PAI IGNORADO') |> str_detect(regex_paimae_desconhecido3)
-#c('SEM INFORMACAO','IGINORADO','PAI INGNORADO','INGORADO','IGNRADO','IGN IGN','PAI INGUINORADO') |> str_detect(regex_paimae_desconhecido4)
-#c('VIRGEM MAE','SANTOS PAI','SEM TERRA','PAI DE OLIVEIRA','MAE DA SILVA','MAE DE SOUZA','PINTO PAI','BATISTA MAE','SANTANA PAI','SILVA DE PAI','DA PAI') |> str_detect(regex_nome_aceito)
-#names <- c("JOÃO DA SILVA", "MARIA DE SOUZA", "JOSÉ DOS SANTOS", "ANA PAULA DO CARMO", "CARLOS EDUARDO DAS NEVES", "LUÍSA E SILVA","LUÍSA DE SILVA")
 
 
 #regex SR|SRA
 
-#(?:\\s{0,2}) <- retirado após \\bS <- S R (falsos positivos sobrenomes abreviados)
+#(?:\\s{0,2}) <- retirado pois \\bS <- S R (falsos positivos sobrenomes abreviados)
 
 regex_SR_SRA <- paste0('^',gsub("H","H?",spaced_word('SENHOR')),'A?\\b')
 
@@ -262,9 +220,9 @@ regex_SR_SRA <- paste0('^',gsub("H","H?",spaced_word('SENHOR')),'A?\\b')
 ##regex ignorado/desconhecido adicionais
 dicionario_marcas_ignorados <- c(
   "^$", # vazio
-  "^.$", # caractere único
+  "^.$", # apenas um caractere 
   "DES\\s?CONHEC",
-  "\\bINDETER\\S", # indeter + caractere não espaço - evita ex. Lindeter Maria...
+  "\\bINDETER\\S", # indeter + caractere diferente de ' ' - evita ex. Lindeter Maria...
   "\\bINE[XS]IST", #inexistente inesistente
   "[^DS]IN*G[OUI]*NORA[DRAOS]*\\b", #IGNORADA INGONORADO E VARIANTES
   
@@ -273,11 +231,11 @@ dicionario_marcas_ignorados <- c(
   
   # omitido, se omite
   ## AJUSTADO PARA EVITAR - omiterio, comite, domitilde, domitilia, jacomite etc 
-  ## Problema OMITE como nome, OMITI como último sobrenome - menor caso DARCI OMITI
+  ## Problema OMITE como nome, OMITI como sobrenome final - menor caso DARCI OMITI
   ##separar
-  ## 1 OMITE + VARIAÇÕES QUE NÃO PRIMEIRO NOME Efetivo- menor caso OMITE DOS SANTOS LIMA
+  ## 1 OMITE + alternativas diferentes de PRIMEIRO NOME Efetivo- menor caso OMITE DOS SANTOS LIMA
   "\\bOMIT[E]\\b.{0,7}$",
-  ## 2 OMITI + VARIAÇÕES
+  ## 2 OMITI + alternativas
   "^.{0,5}\\bOMIT[I]D?[AO]?\\b"
   
   
@@ -287,16 +245,16 @@ dicionario_marcas_ignorados <- c(
 
 
 
-###IGNORADO - 35 CASOS GERAIS FORA DE NOME DE PAI E MÃE
+###IGNORADO - 35 CASOS GERAIS FORA DE NOME DE PAI E MAE
 regex_IGNORADO <- paste0(dicionario_marcas_ignorados,collapse = "|")
 
 
-###regex ignorado regra substituição
+###regex ignorado regra para substituir
 regex_ignorados_subst <- c(
   "^$", # vazio
-  "^.$", # caractere único
+  "^.$", # apenas um caractere
   "DES\\s?CONHEC\\S+\\b",
-  "\\bINDETER\\S+\\b", # indeter + caractere não espaço - evita ex. Lindeter Maria...
+  "\\bINDETER\\S+\\b", # indeter + caractere diferente de ' ' - evita ex. Lindeter Maria...
   "\\bINE[XS]IST\\S+\\b", #inexistente inesistente
   "[^DS]IN*G[OUI]*NORA[DRAOS]*\\b", #IGNORADA INGONORADO E VARIANTES
   
@@ -305,11 +263,11 @@ regex_ignorados_subst <- c(
   
   # omitido, se omite
   ## AJUSTADO PARA EVITAR - omiterio, comite, domitilde, domitilia, jacomite etc 
-  ## Problema OMITE como nome, OMITI como último sobrenome - menor caso DARCI OMITI
+  ## Problema OMITE como nome, OMITI como sobrenome final - menor caso DARCI OMITI
   ##separar
-  ## 1 OMITE + VARIAÇÕES QUE NÃO PRIMEIRO NOME Efetivo- menor caso OMITE DOS SANTOS LIMA
+  ## 1 OMITE + alternativas diferentes de PRIMEIRO NOME Efetivo- menor caso OMITE DOS SANTOS LIMA
   "\\bOMIT[E]\\b",
-  ## 2 OMITI + VARIAÇÕES
+  ## 2 OMITI + alternativas
   "\\bOMIT[I]D?[AO]?\\b"
   
   
@@ -327,22 +285,18 @@ regex_DR_CORONEL <- c(
   'GENERAL',
   'GOVERNADOR',
   'SARGENTO',
-  'CAPITÃO'
+  'CAPIT[A\\u00c3]O'
 )
 
 regex_DR_CORONEL <- paste0("^(",paste0(regex_DR_CORONEL,collapse="|"),")\\b")
 
 
-###Regex teste - como TESTA / TESTO sobrenomes válidos, apenas "TESTE" em qualquer lugar
-regex_TESTE <- c('TESTE','^TESTA','^TESTO')
-
-regex_TESTE <- paste0("\\b(",paste0(regex_TESTE,collapse="|"),")\\b")
 
 
 
 #Regex Letra Inicial repetida
 
-## Lista Repetições 'válidas' no início da palavra ou em palavra completa a excluir
+## Lista caracteres repetidos validos ao iniciar da palavra ou em palavra completa a excluir
 repeticoes_validas <- c("AARAO","II\\b","III\\b","AARON","LL")
 
 
@@ -352,41 +306,3 @@ repvalidas <-
 
 regex_LETRA_IN_REPETIDA <-  paste0("\\b",repvalidas,"([A-Z])\\1+")
 
-
-usethis::use_data(
-  NA_nao, NA_nao2, NA_nada, NA_nada2, NA_sem, NA_nao_nada_sem, NA_nao_nada_sem2,
-  regex_cAO, regex__AO, regex_J_AO, regex_apostrofe, regex_d_vogal_candidato_apostrofo,
-  regex_d_e_pos, regex_d_e_apostrofo, regex_d_e_falsopositivo_apostrofo_melhora_sobrenome,
-  regex_d_a_falso, regex_d_a_apostrofo, regex_d_a_falsopositivo_apostrofo,
-  regex_d_o_falsopositivo_apostrofo, regex_d_i_falsopositivo_apostrofo_reverter,
-  regex_d_u_falsopositivo_apostrofo, regex_nome_acento1, regex_nome_acento2,
-  regex_nome_acento3, regex_nome_acento4, regex_nome_acento,
-  regex_FALECIDO_main, regex_FALECIDO_prefix, regex_FALECIDO_sufix, regex_FALECIDO_extra1,
-  regex_FALECIDO_extra2, regex_FALECIDO_extra3, regex_FALECIDO_extra, regex_FALECIDO,
-  regex_nome_FALECIDO_start, regex_nome_FALECIDO_end, regex_nome_FALECIDO,
-  regex_CARTORIO, regex_CARTORIODE, regex_CIDADES,
-  regex_P_M_S_N, regex_ORO_NAO, regex_nome_aceito1, regex_nome_aceito2, regex_nome_aceito3,
-  regex_nome_aceito, regex_naoMora, regex_paimae_aceppted_pattern,
-  regex_paimae_desconhecido4,regex_paimae_desconhecido3,
-  NA_nada_nao, 
-  NA_consta,
-  NA_nada_nao_copleto, NA_consta_completo, 
-  NA_nada_nao_consta, 
-  regex_NADA_NAO, regex_CONSTA, regex_NADA_NAO_CONSTA, regex_NADA_CONSTA_sufix, regex_NADA_NAO_CONSTA2,
-  NA_cadastrado, NA_declarado, NA_informado, NA_registro, 
-  NA_nada_nao_cadast, NA_nada_nao_declar, NA_nada_nao_inform, NA_nada_nao_regist,
-  NA_ignorado,NA_outros, NA_const_cadast_decl_inf_reg, NA_const_cadast_decl_inf_reg2,
-  NA_strings, regex_nome_EDADEDOS, regex_nome_EDADEDOS2, regex_nome_AGNOMES,
-  regex_nome_XEDADEDOS, regex_nome_XEDADEDOS_allowed, regex_nome_XEDADEDOS_replace,
-  regex_EDADEDOS_ajuste, regex_DEDEDADA,
-  regex_SR_SRA,
-  dicionario_marcas_ignorados, regex_IGNORADO,regex_IGNORADO_subst,
-  regex_DR_CORONEL,
-  regex_TESTE,
-  repeticoes_validas,repvalidas,
-  regex_LETRA_IN_REPETIDA,
-  internal= TRUE, overwrite = TRUE
-)
-
-# Limpar o ambiente do script data-raw
-rm(list = ls())
