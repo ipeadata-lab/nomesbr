@@ -199,7 +199,7 @@ regex_paimae_desconhecido4    <- '(SEM|^SE?M?) *(NOME|PAI|MAE|DADOS|PREENCHIMENT
 #adicionado 'de las'
 regex_nome_EDADEDOS           <- "\\s+(E|DA|DE|DO|DAS|DOS|DEL|DE LOS|DE LAS)\\s+"
 regex_nome_EDADEDOS2          <-    "^(E|DA|DE|DO|DAS|DOS|DEL|DE LOS|DE LAS)$"
-regex_nome_AGNOMES            <- " (FILHO|FILHA|JUNIOR|JR|NETO|NETA|BISNETO|BISNETA|SOBRINHA|SOBRINHO|SEGUNDO|SEGUNDA|TERCEIRO|TERCEIRA)$"
+regex_nome_AGNOMES            <- " (FILHO|FILHA|JUNIOR|JR|NETO|NETA|BISNETO|BISNETA|SOBRINHA|SOBRINHO|SEGUNDO|SEGUNDA|TERCEIRO|TERCEIRA|\\bFL)$"
 
 regex_nome_XEDADEDOS          <- "\\s+[A-Z](E|D[AO]S?|DE)\\s+"
 regex_nome_XEDADEDOS_allowed  <- "\\s+(DE|ID[AO]|FE|EDO|OSO|DA SE|NE|GE)\\s+"
@@ -279,6 +279,8 @@ regex_IGNORADO_subst <- paste0(regex_ignorados_subst,collapse = "|")
 ## algumas patentes/cargos
 
 regex_DR_CORONEL <- c(
+  'DR',
+  'SGTO',
   'MAJOR',
   'DOUTOR',
   'CORONEL',

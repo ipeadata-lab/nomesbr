@@ -1,11 +1,16 @@
-#' Remove Partículas e Agnomes de Nomes
+#' Remove Partículas, Agnomes e algumas Patentes de Nomes
 #' @param s Vetor de caracteres contendo nomes.
 #' @return Vetor de caracteres com nomes simplificados.
 #' @export
 #' @importFrom stringr str_replace_all
 remove_PARTICULAS_AGNOMES <- function(s){
   s |> stringr::str_replace_all(regex_nome_EDADEDOS, " ") |> 
-    stringr::str_replace_all(regex_nome_AGNOMES, '')
+    stringr::str_replace_all(regex_nome_AGNOMES, '')|>
+  stringr::str_replace_all(regex_DR_CORONEL,'')
+  
+  
+  
+  
 }
 
 
@@ -37,7 +42,7 @@ add_string_w1_w2_w3_and_w2p <- segmentar_nomes
 
 
 
-#' Adiciona Nome Próprio Validado com Base em `np2`
+#' Adiciona Nome Próprio Validado com Base em `nomes_proprios_compostos` `np2`
 #' @param dt Um `data.table`.
 #' @param s Nome da coluna (string) base para derivação das colunas de palavras (ex: se `s = "nome_simpl"`, espera `nome_simpl1`, `nome_simpl2p`).
 #' @return O `data.table` `dt` com colunas `_v2` adicionadas.

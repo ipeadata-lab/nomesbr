@@ -45,7 +45,7 @@
 #' 
 limpar_nomes <- \(d, s) {
   
-  tictoc::tic('Starting')
+  tictoc::tic('Starting - All substeps')
   tictoc::tic('0. Making copy of dataset and add the s2(the var to be cleaned)')
   s2 <- paste0(s, "_clean")
   d <- data.table::copy(d)
@@ -124,18 +124,13 @@ limpar_nomes <- \(d, s) {
   d[ignorado==1,(s2):= stringr::str_remove(get(s2),regex_IGNORADO_subst)]
   tictoc::toc()
   
-  tictoc::tic('9. Detect and clean specific titles - Doutor, Coronel and few others')
-  d[,dr_coronel:= stringr::str_detect(get(s2),regex_DR_CORONEL)]
-  d[dr_coronel==1,(s2):= stringr::str_remove(get(s2),regex_DR_CORONEL)]
-  tictoc::toc()
-  
-  tictoc::tic('10. Detect and clean repeated de de da da do do ')
+  tictoc::tic('9. Detect and clean repeated de de da da do do ')
   d[,dede_dada:= stringr::str_detect(get(s2),regex_DEDEDADA)]
   d[dede_dada==1,(s2):= stringr::str_remove(get(s2),regex_DEDEDADA)]
   tictoc::toc()
 
   
-  tictoc::tic('11. Detect and clean repeated letters with specific rules whether at beginning or middle of the word')
+  tictoc::tic('10. Detect and clean repeated letters with specific rules whether at beginning or middle of the word')
   d[,letra_repetida:= stringr::str_detect(get(s2),"([^\\s])\\1+")]
   #clean repeated letters in beginning of word not considered valid
   d[letra_repetida==1,(s2):= gsub(regex_LETRA_IN_REPETIDA,"\\1",get(s2),perl=T)]
@@ -144,7 +139,7 @@ limpar_nomes <- \(d, s) {
   d[letra_repetida==1,(s2):= stringr::str_replace_all(get(s2),"(?<!\\b)([RSrs])\\1\\1+","\\1\\1")]
   tictoc::toc()
   
-  tictoc::tic('12. Force NA if resulting cleaned name is empty or spaces')
+  tictoc::tic('11. Force NA if resulting cleaned name is empty or spaces')
   d[grepl('^\\s*$',nome_clean),nome_clean:= NA_character_]
   tictoc::toc()
   tictoc::toc()
