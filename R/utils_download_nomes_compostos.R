@@ -8,7 +8,6 @@
 #' @importFrom tools R_user_dir
 #' @importFrom utils download.file
 #' @importFrom httr2 request req_perform resp_body_raw req_retry req_error req_user_agent req_progress
-#' @importFrom data.table fread
 obter_dic_nomes_proprios_compostos <- function() {
   pkg_name <- "nomesbr" 
   cache_dir <- tools::R_user_dir(package = pkg_name, which = "cache")
@@ -29,15 +28,6 @@ obter_dic_nomes_proprios_compostos <- function() {
     # Construir a requisição com httr2
     req <- httr2::request(nomes_proprios_compostos_url) |>
       httr2::req_user_agent(paste0(pkg_name, " (https://github.com/ipeadata-lab/nomesbr)")) 
-    
-    # Adicionar autenticação se GITHUB_PAT estiver disponível
-    github_token <- Sys.getenv("GITHUB_PAT")
-    if (nzchar(github_token)) { # nzchar verifica se a string não é vazia
-      message("Usando GITHUB_PAT para autenticar.")
-      req <- req |> httr2::req_auth_bearer_token(github_token)
-    } else {
-      message("Nenhum GITHUB_PAT encontrado. Tentando download publicamente.")
-    }
     
     req <- req|>
       httr2::req_retry(max_tries = 3, is_transient = \(resp) httr2::resp_status(resp) %in% c(401,403,404,429, 500, 502, 503, 504)) |> # Tentar novamente em caso de falhas temporárias
@@ -86,7 +76,7 @@ obter_dic_nomes_proprios_compostos <- function() {
   }
   
   # Ler o arquivo RDS
-  nomes_proprios_compostos_data <- data.table::fread(nomes_proprios_compostos_file_path)
+  nomes_proprios_compostos_data <- readRDS(nomes_proprios_compostos_file_path)
   
   
   return(nomes_proprios_compostos_data)
