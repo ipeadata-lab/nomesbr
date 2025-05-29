@@ -1,3 +1,11 @@
+# nomesbr 0.0.3
+
+* fixes for some regexes part positions - DE LAS
+* improved unit test for obter_dic_nomes_proprios_compostos
+* added function simplifica_PARTICULAS_AGNOMES_PATENTES capturing in new column detected regex before replacing
+* included use_github_action 'check-standard'
+* improved minimally global timing message for limpar_nomes
+
 # nomesbr 0.0.2
 
 * pkgdown site

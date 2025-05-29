@@ -13,6 +13,47 @@ remove_PARTICULAS_AGNOMES <- function(s){
   
 }
 
+#' Cria coluna com agnomes, algumas patentes/cargos as remove, remove partículas
+#' @param d um objeto `data.table`
+#' @param s Vetor de caracteres contendo nomes para simplificar. Padrão nome_clean.
+#' @return Vetor de caracteres com nomes simplificados.
+#' @export
+#' @import data.table
+#' @importFrom stringr str_replace_all str_extract
+simplifica_PARTICULAS_AGNOMES_PATENTES <- function(d,s="nome_clean"){
+  tictoc::tic('Starting - All substeps')
+  tictoc::tic('0. Making copy of dataset and add the s2(the var to be cleaned)')
+  #Remove _clean
+  s2 <- paste0(gsub("_clean","",s), "_simp")
+  d <- data.table::copy(d)
+  d[, (s2) := get(s)]
+  tictoc::toc()
+  
+  tictoc::tic('1. remove particles e da de do(s)')
+  d[,(s2):= stringr::str_replace_all(get(s2),regex_nome_EDADEDOS, " ") ]
+  tictoc::toc()
+  
+  tictoc::tic("2. Detect and remove AGNOMES and titles")
+  d[,agnomes_titulos:=
+      stringr::str_extract(get(s2),paste0("(",regex_nome_AGNOMES,
+                                         "|",regex_DR_CORONEL,")"))|>
+      stringr::str_trim('both')]
+  
+  d[!is.na(agnomes_titulos),(s2):=
+      stringr::str_replace_all(get(s2),regex_nome_AGNOMES, '')|>
+      stringr::str_replace_all(regex_DR_CORONEL,'')]
+  tictoc::toc()
+  
+  d[,(s2):=str_trim(get(s2),'both')]
+  
+  tictoc::toc()
+  
+  return(d)
+  
+  
+}
+
+
 
 #' Adiciona Colunas com Partes do Nome (w1, w2, w3, w2p, w12p)
 #' @param dt Um `data.table`.

@@ -1,4 +1,9 @@
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ipeadata-lab/nomesbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ipeadata-lab/nomesbr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 ## nomesbr
 
 **nomesbr** é um pacote de R que limpa e simplifica nomes de pessoas

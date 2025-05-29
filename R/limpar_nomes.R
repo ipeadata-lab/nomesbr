@@ -44,7 +44,7 @@
 #' 
 limpar_nomes <- \(d, s) {
   
-  tictoc::tic('Starting - All substeps')
+  tictoc::tic('All substeps')
   tictoc::tic('0. Making copy of dataset and add the s2(the var to be cleaned)')
   s2 <- paste0(s, "_clean")
   d <- data.table::copy(d)

@@ -23,6 +23,23 @@ test_that("remove_PARTICULAS_AGNOMES funciona", {
 
 
 #Teste para função de download de dado nomes_proprios_data
-test_that("obter_dic_nomes_proprios_compostos funciona",
-          expect_true(grepl("cache/R/nomesbr/nomes_proprios_compostos.rds",obter_dic_nomes_proprios_compostos()))
+test_that("obter_dic_nomes_proprios_compostos funciona", {
+  skip_on_cran()
+  caminho_np <- obter_dic_nomes_proprios_compostos()
+  expect_type(caminho_np,'character')
+  expect_true(length(caminho_np)==1)
+  expect_true(file.exists(caminho_np),info = "Arquivo nomes_proprios_compostos.rds inexiste, houve problema no download ou cache")
+  expect_equal(as.character(tools::md5sum(caminho_np)),"7a09ca2d0d259b29979966fdf923fa4d",
+               info = "Checksum do arquivo distinto do esperado.")
+}
 )
+
+
+#Teste para função simplifica_PARTICULAS_AGNOMES_PATENTES
+test_that('simplifica_PARTICULAS_AGNOMES_PATENTES',{
+  d <- data.table(nome_clean = c('JOAO DA SILVA FILHO','SARGENTO JOSE','DRA GLAUCIA','JOSE DE LA RUA'))
+  d <- simplifica_PARTICULAS_AGNOMES_PATENTES(d)[,.(nome_simp,agnomes_titulos)]
+  expect_equal(d,
+          data.table(nome_simp = c('JOAO SILVA','JOSE','GLAUCIA','JOSE RUA'),
+                     agnomes_titulos = c('FILHO','SARGENTO','DRA',NA)))
+  })

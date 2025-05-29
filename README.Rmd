@@ -9,6 +9,9 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-"
 )
 ```
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/ipeadata-lab/nomesbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ipeadata-lab/nomesbr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 ## nomesbr
 

@@ -197,9 +197,9 @@ regex_paimae_desconhecido3    <- paste0('^(|',NA_strings,')$')
 regex_paimae_desconhecido4    <- '(SEM|^SE?M?) *(NOME|PAI|MAE|DADOS|PREENCHIMENTO|DENOMICAO|IN?DEN?TIFICACAO|PATERNIDADE|DECL?A?R?A?(R|CAO)?|RESPONSAVEL|INFO?R?M?A?(R|(CA?O?))?|PREENCHIMENTO|DENOMIN?A?CAO|REGISTRO|FILIACAO|VALOR|PARADEIRO|IDENTIDADE)'
 
 #adicionado 'de las'
-regex_nome_EDADEDOS           <- "\\s+(E|DA|DE|DO|DAS|DOS|DEL|DE LOS|DE LAS)\\s+"
-regex_nome_EDADEDOS2          <-    "^(E|DA|DE|DO|DAS|DOS|DEL|DE LOS|DE LAS)$"
-regex_nome_AGNOMES            <- " (FILHO|FILHA|JUNIOR|JR|NETO|NETA|BISNETO|BISNETA|SOBRINHA|SOBRINHO|SEGUNDO|SEGUNDA|TERCEIRO|TERCEIRA|\\bFL)$"
+regex_nome_EDADEDOS           <- "\\s+(DE LOS|DE LAS?|E|DA|DE|DO|DAS|DOS|DEL)\\s+"
+regex_nome_EDADEDOS2          <-    "^(DE LOS|DE LAS?|E|DA|DE|DO|DAS|DOS|DEL)$"
+regex_nome_AGNOMES            <- " (FILHO|FILHA|JUNIOR|JR|NETO|NETA|BISNETO|BISNETA|SOBRINHA|SOBRINHO|SEGUNDO|SEGUNDA|TERCEIRO|TERCEIRA|FL)$"
 
 regex_nome_XEDADEDOS          <- "\\s+[A-Z](E|D[AO]S?|DE)\\s+"
 regex_nome_XEDADEDOS_allowed  <- "\\s+(DE|ID[AO]|FE|EDO|OSO|DA SE|NE|GE)\\s+"
@@ -279,13 +279,14 @@ regex_IGNORADO_subst <- paste0(regex_ignorados_subst,collapse = "|")
 ## algumas patentes/cargos
 
 regex_DR_CORONEL <- c(
-  'DR',
+  'DRA?',
   'SGTO',
+  'TENENTE',
   'MAJOR',
-  'DOUTOR',
+  'DOUTORA?',
   'CORONEL',
   'GENERAL',
-  'GOVERNADOR',
+  'GOVERNADORA?',
   'SARGENTO',
   'CAPIT[A\\u00c3]O'
 )
