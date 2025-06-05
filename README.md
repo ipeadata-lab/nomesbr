@@ -12,9 +12,10 @@ para auxiliar no pareamento de banco de dados na ausência de chaves
 simplifica opcionalmente termos sujeitos eventualmente a omissão em
 cadastros, e simplifica .
 
-(R package for tidying and simplifying. Created for aiding in dataset
-pairing in the absence of unambiguous keys. It detects and corrects
-common typos, optionally simplifies terms prone to omission in records.)
+(R package for tidying and simplifying names. Created for aiding in
+dataset pairing in the absence of unambiguous keys. It detects and
+corrects common typos, optionally simplifies terms prone to omission in
+records.)
 
 ## Instalação
 

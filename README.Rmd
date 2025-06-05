@@ -21,8 +21,8 @@ ambíguas. Detecta e corrige erros tipográficos mais comuns, simplifica
 opcionalmente termos sujeitos eventualmente a omissão em cadastros, e 
 simplifica . 
 
-(R package for tidying and simplifying. Created for aiding in dataset pairing in 
-the absence of unambiguous keys.
+(R package for tidying and simplifying names. Created for aiding in dataset pairing 
+in the absence of unambiguous keys.
 It detects and corrects common typos, optionally simplifies terms prone 
 to omission in records.)
 
