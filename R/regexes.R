@@ -38,10 +38,10 @@ NA_nao_nada_sem2 <- paste0('^(',NA_nao2,'|',NA_nada2,'|',NA_sem,')$')
 regex_cAO <- '(CO[NM]CEIC|CON EIC|INIFORMAC|ANUN?CIAC|ASS?UMPC|RESSURREIC|INCARNAC|ASSUNC|ABRA|VISITAC|ENCARNAC|CRISTOV|GALV|ARAG|^AD|^JO| JO|^LE| LE|SALOM|SIM|GIR|TRIST|EST[EI]?V|SEBASTI|ESTEV|GUSM|SILV|ROM|FALC|DAMI|PAIX|FRAZ|IRM|^N| N) AO( |$)'
 regex__AO <- '(CO[NM]CEI|CON EI|INI?FORMA|IDENTIFICA|AU?NUNCIA|ASS?UMP?|ASSUN|ANUNCIA|VISITA|PURIFICA|ENCARNA|RESSUREI|GAL|ARA|TRIS|ESTE|CONSOLA|FRANCIS|C[OA]NCEI|FAL) AO( |$)'
 regex_J_AO <- '(^| )J AO( |$)'
-regex_apostrofe <- "\\bSANT AN+A|\\bD AR[CK]|\\bD AVIL+A|\\bD ANGELO|\\bD ALESSANDR|\\bD AQUINO|\\bD AMICO|\\bD AMICO|\\bD OR|\\bD A(G|CQ)UA|\\bD [AOE]S?\\b"
+regex_apostrofe <- "\\bSANT AN+A|\\bD AR[CK]|\\bD AVIL+A|\\bD ANGELO|\\bD ALESSANDR|\\bD AQUINO|\\bD AMICO|\\bD AMICO|\\bD OR|\\bD A(G|CQ)UA|\\bD [AO]S?|\\b(D E(?!\\s+(SANTO|STO\\b|S\\b)))"
 regex_d_vogal_candidato_apostrofo <- "\\bD ([AEIOU]\\w{3,})\\b"
 ##outros casos com muito alta confiabilidade do d separado por apostrofe ou erro tipografico no cadastro ex D ENADAI quando DENADAI - verificado com screening de todas as possibilidades juntas  d e\w{3,} 
-regex_d_e_pos <- "(CC|CH|CLAR|GM|LAQ|LBO|LEUT|LLY|MM|NADAI|PIR|RC|RAS|RRI|SCONHECI|SP|SQ|STE|TT|U|VAN|VE|X|Z)"
+regex_d_e_pos <- "(CC|CH|CLAR|GM|LAQ|LBO|LEUT|LLY|MM|NADAI|PIR|RC|RAS|RRI|SCONHECI|SP|SQ|STE|TT|U|VAN|VE|X|Z|\\s+(SANTO|STO\\b|S\\b))"
 regex_d_e_apostrofo <- paste0("\\bD E(?=",regex_d_e_pos,")")
 ## erros tipograficos como D ELIMA - parecido com limpa acento/apostrofo
 regex_d_e_falsopositivo_apostrofo_melhora_sobrenome <- gsub("=","!",regex_d_e_apostrofo)
@@ -197,16 +197,19 @@ regex_paimae_desconhecido3    <- paste0('^(|',NA_strings,')$')
 regex_paimae_desconhecido4    <- '(SEM|^SE?M?) *(NOME|PAI|MAE|DADOS|PREENCHIMENTO|DENOMICAO|IN?DEN?TIFICACAO|PATERNIDADE|DECL?A?R?A?(R|CAO)?|RESPONSAVEL|INFO?R?M?A?(R|(CA?O?))?|PREENCHIMENTO|DENOMIN?A?CAO|REGISTRO|FILIACAO|VALOR|PARADEIRO|IDENTIDADE)'
 
 #adicionado 'de las'
-regex_nome_EDADEDOS           <- "\\s+(DE LOS|DE LAS?|E|DA|DE|DO|DAS|DOS|DEL)\\s+"
-regex_nome_EDADEDOS2          <-    "^(DE LOS|DE LAS?|E|DA|DE|DO|DAS|DOS|DEL)$"
+regex_base_nome_EDADOS <- c("DE","DO","DA","DI","DU","DOS","DAS","DEL","DE LOS","DE LAS?","D")
+regex_base_particula <- paste(regex_base_nome_EDADOS, collapse = "|")
+regex_qualquer_particula <- paste0("\\b(", regex_base_particula, ")\\b")
+regex_nome_EDADEDOS           <- paste0("\\s+(",regex_base_particula,")\\s+")
+regex_nome_EDADEDOS2          <-    paste0("^(",regex_base_particula,")$")
 regex_nome_AGNOMES            <- " (FILHO|FILHA|JUNIOR|JR|NETO|NETA|BISNETO|BISNETA|SOBRINHA|SOBRINHO|SEGUNDO|SEGUNDA|TERCEIRO|TERCEIRA|FL)$"
 
 regex_nome_XEDADEDOS          <- "\\s+[A-Z](E|D[AO]S?|DE)\\s+"
 regex_nome_XEDADEDOS_allowed  <- "\\s+(DE|ID[AO]|FE|EDO|OSO|DA SE|NE|GE)\\s+"
 regex_nome_XEDADEDOS_replace  <- "(\\s+)[BCDFGHJLNMPRSVQW](D[EAO]S?)(\\s+)"
+#gsub("\\|E\\)$","",
 
-regex_EDADEDOS_ajuste <- gsub("^\\\\s\\+","",regex_nome_EDADEDOS)
-regex_DEDEDADA <- paste0('\\b(',regex_EDADEDOS_ajuste,'|D\\s+)(',regex_EDADEDOS_ajuste,'|D\\b)')
+regex_DEDEDADA <- paste0('(\\b(',regex_base_particula,')(\\s+(',regex_base_particula,')\\b)+)')
 
 
 

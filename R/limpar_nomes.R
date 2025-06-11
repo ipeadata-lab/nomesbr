@@ -124,8 +124,21 @@ limpar_nomes <- \(d, s) {
   tictoc::toc()
   
   tictoc::tic('9. Detect and clean repeated de de da da do do ')
-  d[,dede_dada:= stringr::str_detect(get(s2),regex_DEDEDADA)]
-  d[dede_dada==1,(s2):= stringr::str_remove(get(s2),regex_DEDEDADA)]
+  d[,dede_dada:= stringr::extract(get(s2),regex_DEDEDADA)]
+  #Limpa Salvo exceções 
+  d[!is.na(dede_dada) & !stringr::str_detect(get(s2),'\\b(D[OE]? E (S|STO|SANTOS?)|HIL DA|RAIMUN DA|DAS D|E DE|DA E|DE DA|^DEL|D[EA]* DOS)\\b'),
+              (s2):=stringr::str_replace_all(get(s2),paste0("(",regex_qualquer_particula,"\\b)\\s+\\1+"),"\\1")]
+  
+  #DE DA - virar DA salvo exceção DE DA ARAUJO -  i.e. não seguir regra de manter partícula sem flexão de gênero
+
+  d[stringr::str_detect(dede_dada,"DE DA$") & !stringr::str_detect(get(s2),'DA ARAUJO'),
+    (s2):=stringr::str_replace_all(get(s2),"\\bDE\\s+DA\\b","DA")]
+  
+  #D[EA]* DOS  - virar DOS - i.e. não seguir regra de manter partícula sem flexão de gênero
+  d[stringr::str_detect(dede_dada,"D[EA]* DOS"),
+    (s2):=stringr::str_replace_all(get(s2),"\\bD[EA]* DOS\\b","DOS")]
+  
+  d[,dede_dada:=!is.na(dede_dada)]
   tictoc::toc()
 
   
@@ -139,7 +152,7 @@ limpar_nomes <- \(d, s) {
   tictoc::toc()
   
   tictoc::tic('11. Force NA if resulting cleaned name is empty or spaces')
-  d[grepl('^\\s*$',nome_clean),nome_clean:= NA_character_]
+  d[grepl('^\\s*$',get(s2)),s2:= NA_character_]
   tictoc::toc()
   tictoc::toc()
   return(d)

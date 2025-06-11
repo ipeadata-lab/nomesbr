@@ -15,3 +15,45 @@ limpa_espaco_acento_til_apostrofe <- function(c) {
   return(c)
 }
 
+
+#' @keywords internal
+# Função de substituição personalizada
+resolver_sequencia_particulas <- function(match_completo) {
+  # match_completo é a string inteira da sequência detectada, ex: "E DE DO"
+  # Precisamos dos espaços originais para reconstruir corretamente
+  # No entanto, para a lógica de decisão, apenas as partículas importam.
+  
+  # Extrair as partículas individuais da sequência
+  particulas_na_sequencia <- stringr::str_extract_all(match_completo, regex_qualquer_particula)[[1]]
+  
+  
+  # Lógica de Prioridade para manter a partícula "menos comum" / "mais específica"
+  particula_a_manter <- NA_character_
+  prioridade_maxima_encontrada <- -1
+  
+  for (p in particulas_na_sequencia) {
+    posicao_na_lista_prioridade <- match(p, regex_base_nome_EDADOS) # regex_base_nome_EDADOS
+    if (!is.na(posicao_na_lista_prioridade)) {
+      # Como a lista está de MAIS ESPECÍFICA para MENOS ESPECÍFICA,
+      # a primeira que encontrarmos com uma prioridade válida é a melhor até agora.
+      # Se quisermos a que tem o MENOR índice (mais específica):
+      if (is.na(particula_a_manter) || posicao_na_lista_prioridade < prioridade_maxima_encontrada) {
+        particula_a_manter <- p
+        prioridade_maxima_encontrada <- posicao_na_lista_prioridade
+      }
+    }
+  }
+  
+  # Se por algum motivo nenhuma partícula válida for encontrada (improvável com a regex),
+  # ou se a lógica falhar, retorne a primeira da sequência como fallback seguro,
+  # ou a string original para evitar remoção indevida.
+  if (is.na(particula_a_manter) || nchar(particula_a_manter) == 0) {
+    if (length(particulas_na_sequencia) > 0) {
+      return(particulas_na_sequencia[1]) # Fallback: manter a primeira
+    } else {
+      return(match_completo) # Fallback muito seguro
+    }
+  }
+  
+  return(particula_a_manter)
+}
