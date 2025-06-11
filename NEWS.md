@@ -1,3 +1,7 @@
+# nomesbr 0.0.4
+
+* improved cleaning step - 'remove repeated de de, da da...'
+
 # nomesbr 0.0.3
 
 * fixes for some regexes part positions - DE LAS
