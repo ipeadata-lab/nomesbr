@@ -197,7 +197,7 @@ regex_paimae_desconhecido3    <- paste0('^(|',NA_strings,')$')
 regex_paimae_desconhecido4    <- '(SEM|^SE?M?) *(NOME|PAI|MAE|DADOS|PREENCHIMENTO|DENOMICAO|IN?DEN?TIFICACAO|PATERNIDADE|DECL?A?R?A?(R|CAO)?|RESPONSAVEL|INFO?R?M?A?(R|(CA?O?))?|PREENCHIMENTO|DENOMIN?A?CAO|REGISTRO|FILIACAO|VALOR|PARADEIRO|IDENTIDADE)'
 
 #adicionado 'de las'
-regex_base_nome_EDADOS <- c("DE","DO","DA","DI","DU","DOS","DAS","DEL","DE LOS","DE LAS?","D")
+regex_base_nome_EDADOS <- c("DE LOS","DE LAS?","DE","DO","DA","DI","DU","DOS","DAS","DEL","D")
 regex_base_particula <- paste(regex_base_nome_EDADOS, collapse = "|")
 regex_qualquer_particula <- paste0("\\b(", regex_base_particula, ")\\b")
 regex_nome_EDADEDOS           <- paste0("\\s+(",regex_base_particula,")\\s+")
