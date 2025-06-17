@@ -40,7 +40,21 @@ remotes::install_github("ipeadata-lab/nomesbr")
 
 ## Utilização
 
+O pacote **nomesbr** torna disponíveis funções para limpar e simplificar nomes.
+ `limpar_nomes()` e `simplifica_PARTICULAS_AGNOMES_PATENTES()`, principais funções 
+ do pacote, foram criadas para seu uso em sequência nessa ordem.
 
+`limpar_nomes()` recebe como parâmetros d,um data.frame, e s, nome da coluna 
+com os nomes a processar. A função cria uma nova coluna, com sufixo '_clean', e gera 
+novas colunas com informações dos tipos de limpeza detectados 
+como necessários e realizados.
+
+`simplifica_PARTICULAS_AGNOMES_PATENTES()` recebe também, d e s (por padrão para s, 'nome_clean')
+ como parâmetros, e simplifica partículas repetidas, agnomes e alguma patentes.  
+ 
+ A informação (novas colunas) gerada pela função `limpar_nomes()` servem como base 
+ para a função `tabular_problemas_em_nomes()` , que retorna uma tabela resumo 
+ dos problemas detectados e ações tomadas no sentido da limpeza de nomes.
 
 ## Nota <a href="https://www.ipea.gov.br"><img src="man/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>
 
