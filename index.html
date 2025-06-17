@@ -73,6 +73,10 @@
 <div class="section level2">
 <h2 id="utilização">Utilização<a class="anchor" aria-label="anchor" href="#utiliza%C3%A7%C3%A3o"></a>
 </h2>
+<p>O pacote <strong>nomesbr</strong> torna disponíveis funções para limpar e simplificar nomes. <code><a href="reference/limpar_nomes.html">limpar_nomes()</a></code> e <code><a href="reference/simplifica_PARTICULAS_AGNOMES_PATENTES.html">simplifica_PARTICULAS_AGNOMES_PATENTES()</a></code>, principais funções do pacote, foram criadas para seu uso em sequência nessa ordem.</p>
+<p><code><a href="reference/limpar_nomes.html">limpar_nomes()</a></code> recebe como parâmetros d,um data.frame, e s, nome da coluna com os nomes a processar. A função cria uma nova coluna, com sufixo ’_clean’, e gera novas colunas com informações dos tipos de limpeza detectados como necessários e realizados.</p>
+<p><code><a href="reference/simplifica_PARTICULAS_AGNOMES_PATENTES.html">simplifica_PARTICULAS_AGNOMES_PATENTES()</a></code> recebe também, d e s (por padrão para s, ‘nome_clean’) como parâmetros, e simplifica partículas repetidas, agnomes e alguma patentes.</p>
+<p>A informação (novas colunas) gerada pela função <code><a href="reference/limpar_nomes.html">limpar_nomes()</a></code> servem como base para a função <code><a href="reference/tabular_problemas_em_nomes.html">tabular_problemas_em_nomes()</a></code> , que retorna uma tabela resumo dos problemas detectados e ações tomadas no sentido da limpeza de nomes.</p>
 </div>
 <div class="section level2">
 <h2 id="nota-">Nota <a href="https://www.ipea.gov.br" class="external-link"><img src="reference/figures/ipea_logo.png" alt="Ipea" align="right" width="300"></a>
