@@ -124,7 +124,7 @@ limpar_nomes <- \(d, s) {
   tictoc::toc()
   
   tictoc::tic('9. Detect and clean repeated de de da da do do ')
-  d[,dede_dada:= stringr::extract(get(s2),regex_DEDEDADA)]
+  d[,dede_dada:= stringr::str_extract(get(s2),regex_DEDEDADA)]
   #Limpa Salvo exceções 
   d[!is.na(dede_dada) & !stringr::str_detect(get(s2),'\\b(D[OE]? E (S|STO|SANTOS?)|HIL DA|RAIMUN DA|DAS D|E DE|DA E|DE DA|^DEL|D[EA]* DOS)\\b'),
               (s2):=stringr::str_replace_all(get(s2),paste0("(",regex_qualquer_particula,"\\b)\\s+\\1+"),"\\1")]
