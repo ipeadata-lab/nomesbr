@@ -19,8 +19,7 @@ knitr::opts_chunk$set(
 **nomesbr** é um pacote de R que limpa e simplifica nomes de pessoas para 
 auxiliar no pareamento de banco de dados na ausência de chaves únicas não 
 ambíguas. Detecta e corrige erros tipográficos mais comuns, simplifica 
-opcionalmente termos sujeitos eventualmente a omissão em cadastros, e 
-simplifica . 
+opcionalmente termos sujeitos eventualmente a omissão em cadastros. 
 
 (R package for tidying and simplifying names. Created for aiding in dataset pairing 
 in the absence of unambiguous keys.

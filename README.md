@@ -12,7 +12,7 @@ coverage](https://codecov.io/gh/ipeadata-lab/nomesbr/graph/badge.svg)](https://a
 para auxiliar no pareamento de banco de dados na ausência de chaves
 únicas não ambíguas. Detecta e corrige erros tipográficos mais comuns,
 simplifica opcionalmente termos sujeitos eventualmente a omissão em
-cadastros, e simplifica .
+cadastros.
 
 (R package for tidying and simplifying names. Created for aiding in
 dataset pairing in the absence of unambiguous keys. It detects and
