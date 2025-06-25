@@ -1,6 +1,7 @@
 
 nomesteste <- c("PEDRO SANT ANA MOURAO FALECIDO","JJOSE D ACQUA","NAO CONSTA NADA"," TESTE ",
-                "CORONEL JACINTO")
+                "CORONEL JACINTO",
+                "MARIA DO SOCORRO SILVA DE OLIVEIRA")
 
 #Teste para função de limpeza de nomes marcar_problemas_e_limpar_nomes
 test_that("limpar_nomes funciona corretamente",{
@@ -50,7 +51,7 @@ test_that('simplifica_PARTICULAS_AGNOMES_PATENTES funciona corretamente',{
 
 
 
-test_that('R/tabular_problemas_em_nomes funciona corretamente',{
+test_that('tabular_problemas_em_nomes funciona corretamente',{
   d <- limpar_nomes(data.table(nome = nomesteste),'nome')
   tbd <- tabular_problemas_em_nomes(d,'nome')
   
@@ -84,4 +85,14 @@ test_that('R/tabular_problemas_em_nomes funciona corretamente',{
     expect_equal(tbd,expected_answer)
 }
   )
+
+test_that('segmentar_nomes funciona corretamente',{
+  d <- limpar_nomes(data.table(nome = nomesteste),'nome')
+  segnomes <- segmentar_nomes(d,'nome_clean')
   
+  expect_equal(
+    d$nome_clean_w12p,
+    c("PEDRO SANTANA","JOSE DACQUA",
+      NA,"TESTE","CORONEL JACINTO",
+      "MARIA DO SOCORRO"))
+  })

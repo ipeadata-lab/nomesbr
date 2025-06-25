@@ -72,7 +72,7 @@ segmentar_nomes <- function(dt, s){
   dt[!is.na(get(s2)) &  stringr::str_detect(get(s2), regex_nome_EDADEDOS2) & !is.na(get(s3)),  (s2p) := paste( get(s2), get(s3), sep = " ")]
   dt[!is.na(get(s2)) & !stringr::str_detect(get(s2), regex_nome_EDADEDOS2)                , (s2p) := get(s2)]
   dt[ is.na(get(s2)) , (s12p) :=        get(s1)]
-  dt[!is.na(get(s2)) , (s12p) := paste( get(s1), get(s2p), sep = " ")]
+  dt[!is.na(get(s2)) , (s12p) := trimws(paste( get(s1), get(s2p), sep = " "))]
   
   return(invisible(dt))
 }
