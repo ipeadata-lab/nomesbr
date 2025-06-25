@@ -1,12 +1,14 @@
 
 nomesteste <- c("PEDRO SANT ANA MOURAO FALECIDO","JJOSE D ACQUA","NAO CONSTA NADA"," TESTE ",
-                "CORONEL JACINTO",
+                "CORONEL JACINTO CUNHA",
                 "MARIA DO SOCORRO SILVA DE OLIVEIRA")
+d <- data.table(nome = nomesteste)
+dclean <- limpar_nomes(d,'nome')
 
 #Teste para função de limpeza de nomes marcar_problemas_e_limpar_nomes
 test_that("limpar_nomes funciona corretamente",{
-  DT_input <- data.table(nome = nomesteste)
-  DT_cleaned <- limpar_nomes(DT_input,"nome")
+  DT_input <- d
+  DT_cleaned <- dclean
   
   expect_equal(DT_cleaned[1,nome_clean],'PEDRO SANTANA MOURAO') #FALECIDO removido, removido espaco avaliado como apostrofo 
   expect_equal(DT_cleaned[2,nome_clean],'JOSE DACQUA') #repetição de D removida, removido espaco avaliado como apostrofo
@@ -41,9 +43,9 @@ test_that("obter_dic_nomes_proprios_compostos funciona", {
 
 #Teste para função simplifica_PARTICULAS_AGNOMES_PATENTES
 test_that('simplifica_PARTICULAS_AGNOMES_PATENTES funciona corretamente',{
-  d <- data.table(nome_clean = c('JOAO DA SILVA FILHO','SARGENTO JOSE','DRA GLAUCIA','JOSE DE LA RUA'))
-  d <- simplifica_PARTICULAS_AGNOMES_PATENTES(d)[,.(nome_simp,agnomes_titulos)]
-  expect_equal(d,
+  dspap <- data.table(nome_clean = c('JOAO DA SILVA FILHO','SARGENTO JOSE','DRA GLAUCIA','JOSE DE LA RUA'))
+  dspap <- simplifica_PARTICULAS_AGNOMES_PATENTES(dspap)[,.(nome_simp,agnomes_titulos)]
+  expect_equal(dspap,
           data.table(nome_simp = c('JOAO SILVA','JOSE','GLAUCIA','JOSE RUA'),
                      agnomes_titulos = c('FILHO','SARGENTO','DRA',NA)))
   })
@@ -52,14 +54,13 @@ test_that('simplifica_PARTICULAS_AGNOMES_PATENTES funciona corretamente',{
 
 
 test_that('tabular_problemas_em_nomes funciona corretamente',{
-  d <- limpar_nomes(data.table(nome = nomesteste),'nome')
-  tbd <- tabular_problemas_em_nomes(d,'nome')
+  tbd <- tabular_problemas_em_nomes(dclean,'nome')
   
   cond <- \(x) {
     if (x == 'final_missing'){
-      (d$nada_nao == 1 | d$consta == 1) & is.na(d$nome_clean)
+      (dclean$nada_nao == 1 | dclean$consta == 1) & is.na(dclean$nome_clean)
     } else {
-      d[[x]] == 1
+      dclean[[x]] == 1
     }
   }
   
@@ -79,20 +80,46 @@ test_that('tabular_problemas_em_nomes funciona corretamente',{
   expected_answer <- data.table(
     condition = condicoes,
     N_detected = sapply(condicoes,\(x) sum(cond(x),na.rm=TRUE),USE.NAMES = FALSE),
-    N_made_NA = sapply(condicoes,\(x) sum(cond(x) & is.na(d$nome_clean),na.rm=TRUE),USE.NAMES = FALSE),
-    N_replaced = sapply(condicoes,\(x) sum(cond(x) & !is.na(d$nome_clean) & d$nome_clean!=d$nome,na.rm=T),USE.NAMES = FALSE)
+    N_made_NA = sapply(condicoes,\(x) sum(cond(x) & is.na(dclean$nome_clean),na.rm=TRUE),USE.NAMES = FALSE),
+    N_replaced = sapply(condicoes,\(x) sum(cond(x) & !is.na(dclean$nome_clean) & dclean$nome_clean!=d$nome,na.rm=T),USE.NAMES = FALSE)
   )
     expect_equal(tbd,expected_answer)
 }
   )
 
 test_that('segmentar_nomes funciona corretamente',{
-  d <- limpar_nomes(data.table(nome = nomesteste),'nome')
-  segnomes <- segmentar_nomes(d,'nome_clean')
+  
+  segnomes <- segmentar_nomes(dclean,'nome_clean')
   
   expect_equal(
-    d$nome_clean_w12p,
+    segnomes$nome_clean_w12p,
     c("PEDRO SANTANA","JOSE DACQUA",
       NA,"TESTE","CORONEL JACINTO",
       "MARIA DO SOCORRO"))
   })
+
+
+test_that('identificar_adicionar_nome_proprio funciona corretamente',{
+  skip_on_cran()
+  npd <- identificar_adicionar_nome_proprio(dclean,'nome_clean')
+  
+  expect_equal(
+    npd$nome_clean1_v2,
+    c("PEDRO","JOSE",
+      NA,"","CORONEL",
+      "MARIA DO SOCORRO"))
+})
+
+
+
+test_that('identificar_adicionar_nome_proprio funciona corretamente',{
+  amostra_np2_data <- testthat::test_path("testdata", "amostra_np2_data_para_testes.RDS")
+  mockery::stub(identificar_adicionar_nome_proprio, 'get_np2_data', function() amostra_np2_data)
+  npd <- identificar_adicionar_nome_proprio(dclean,'nome_clean')
+  
+  expect_equal(
+    npd$nome_clean1_v2,
+    c("PEDRO","JOSE",
+      NA,"","CORONEL",
+      "MARIA DO SOCORRO"))
+})

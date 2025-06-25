@@ -119,9 +119,10 @@ identificar_adicionar_nome_proprio <- function(dt, s) {
   np2_key1  <- np2_candidate1[1]
   np2_key2p <- np2_candidate2p[1]
   setnames(np2, old = c(np2_key1, np2_key2p), new = c(s1, s2p)) #rename key people
-  print(names(np2))  # For debugging: print new names of np2
+  #print(names(np2))  # For debugging: print new names of np2
   
   dt <- np2[dt, on = c(s1, s2p)]
+  
   
   # Create "_v2" columns: if the joined column 'nome_proprio' matches one of the keys, use it; otherwise, keep original.
   dt[, (s1_v2) := ifelse(!is.na(nome_proprio) & (nome_proprio == get(s1) | nome_proprio == get(s2p)),
