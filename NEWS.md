@@ -1,3 +1,10 @@
+# nomesbr 0.0.5
+
+* fix s2 column created with limpar_nomes
+* update tabular_problemas... cond name espaco_Til ...
+* added basic unit test for tabular_problemas
+* improved doc citing Lucas reference
+
 # nomesbr 0.0.4
 
 * improved cleaning step - 'remove repeated de de, da da...'

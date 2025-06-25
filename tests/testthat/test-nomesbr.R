@@ -1,7 +1,10 @@
 
+nomesteste <- c("PEDRO SANT ANA MOURAO FALECIDO","JJOSE D ACQUA","NAO CONSTA NADA"," TESTE ",
+                "CORONEL JACINTO")
+
 #Teste para função de limpeza de nomes marcar_problemas_e_limpar_nomes
 test_that("limpar_nomes funciona corretamente",{
-  DT_input <- data.table(nome = c("PEDRO SANT ANA MOURAO FALECIDO","JJOSE D ACQUA","NAO CONSTA NADA"," TESTE "))
+  DT_input <- data.table(nome = nomesteste)
   DT_cleaned <- limpar_nomes(DT_input,"nome")
   
   expect_equal(DT_cleaned[1,nome_clean],'PEDRO SANTANA MOURAO') #FALECIDO removido, removido espaco avaliado como apostrofo 
@@ -36,10 +39,49 @@ test_that("obter_dic_nomes_proprios_compostos funciona", {
 
 
 #Teste para função simplifica_PARTICULAS_AGNOMES_PATENTES
-test_that('simplifica_PARTICULAS_AGNOMES_PATENTES',{
+test_that('simplifica_PARTICULAS_AGNOMES_PATENTES funciona corretamente',{
   d <- data.table(nome_clean = c('JOAO DA SILVA FILHO','SARGENTO JOSE','DRA GLAUCIA','JOSE DE LA RUA'))
   d <- simplifica_PARTICULAS_AGNOMES_PATENTES(d)[,.(nome_simp,agnomes_titulos)]
   expect_equal(d,
           data.table(nome_simp = c('JOAO SILVA','JOSE','GLAUCIA','JOSE RUA'),
                      agnomes_titulos = c('FILHO','SARGENTO','DRA',NA)))
   })
+
+
+
+
+test_that('R/tabular_problemas_em_nomes funciona corretamente',{
+  d <- limpar_nomes(data.table(nome = nomesteste),'nome')
+  tbd <- tabular_problemas_em_nomes(d,'nome')
+  
+  cond <- \(x) {
+    if (x == 'final_missing'){
+      (d$nada_nao == 1 | d$consta == 1) & is.na(d$nome_clean)
+    } else {
+      d[[x]] == 1
+    }
+  }
+  
+  condicoes <- c(
+    "falecido",
+    "cartorio",
+    "espaco_TilAcentoApostrofe",
+    "nome_P_M_S_N",
+    "nada_nao",
+    "consta", "nada_nao_consta",
+    "nada_nao_consta2",
+    "final_missing",
+    "Xartigo", "sr_sra",
+    "ignorado", 
+    "dede_dada",
+    "letra_repetida")
+  expected_answer <- data.table(
+    condition = condicoes,
+    N_detected = sapply(condicoes,\(x) sum(cond(x),na.rm=TRUE),USE.NAMES = FALSE),
+    N_made_NA = sapply(condicoes,\(x) sum(cond(x) & is.na(d$nome_clean),na.rm=TRUE),USE.NAMES = FALSE),
+    N_replaced = sapply(condicoes,\(x) sum(cond(x) & !is.na(d$nome_clean) & d$nome_clean!=d$nome,na.rm=T),USE.NAMES = FALSE)
+  )
+    expect_equal(tbd,expected_answer)
+}
+  )
+  

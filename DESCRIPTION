@@ -1,7 +1,7 @@
 Package: nomesbr
 Type: Package
 Title: Limpador e simplificador de nomes de pessoas (Person name cleaner and simplifier)
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(
     person(
       "Rodrigo", "Borges",
@@ -17,7 +17,8 @@ Authors@R: c(
     person(
       "Lucas","Mation", 
       role = c("aut"),
-      comment = c(ORCID = "0000-0002-7461-932X"))
+      comment = c(ORCID = "0000-0002-7461-932X")),
+    person("Ipea - Institue for Applied Economic Research", role = c("cph", "fnd"))
   )
 Description: Limpa e simplifica nomes de pessoas para auxiliar no pareamento 
     de banco de dados na ausência de chaves únicas não ambíguas. Detecta e 
@@ -29,6 +30,7 @@ Description: Limpa e simplifica nomes de pessoas para auxiliar no pareamento
     typos, optionally simplifies terms prone to omission in records, and 
     applies phonetic simplification using a custom variation of the metaphoneBR 
     algorithm.)
+    Mation (2025) <doi:10.6082/uchicago.15104>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: pt

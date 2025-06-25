@@ -152,7 +152,7 @@ limpar_nomes <- \(d, s) {
   tictoc::toc()
   
   tictoc::tic('11. Force NA if resulting cleaned name is empty or spaces')
-  d[grepl('^\\s*$',get(s2)),s2:= NA_character_]
+  d[grepl('^\\s*$',get(s2)),(s2) := NA_character_]
   tictoc::toc()
   tictoc::toc()
   return(d)

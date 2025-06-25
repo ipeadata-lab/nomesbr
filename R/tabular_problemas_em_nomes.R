@@ -28,7 +28,7 @@ tabular_problemas_em_nomes <- function(d, s) {
   cond_list <- list(
     falecido            = d$falecido == 1,
     cartorio            = d$cartorio == 1,
-    prob_espaco_TilAcento = d$espaco_TilAcentoApostrofe == 1,
+    espaco_TilAcentoApostrofe = d$espaco_TilAcentoApostrofe == 1,
     nome_P_M_S_N        = d$nome_P_M_S_N == 1,
     nada_nao            = d$nada_nao == 1,
     consta              = d$consta == 1,
@@ -38,10 +38,8 @@ tabular_problemas_em_nomes <- function(d, s) {
     Xartigo             = d$Xartigo == 1,
     sr_sra              = d$sr_sra == 1,
     ignorado            = d$ignorado == 1,
-    dr_coronel          = d$dr_coronel == 1,
     dede_dada           = d$dede_dada == 1,
-    teste               = d$teste ==1,
-    letra_repetida           = d$letra_repetida == 1
+    letra_repetida      = d$letra_repetida == 1
   )
   
   # For each condition, compute:
