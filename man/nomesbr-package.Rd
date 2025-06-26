@@ -6,7 +6,7 @@
 \alias{nomesbr-package}
 \title{nomesbr: Limpador e simplificador de nomes de pessoas (Person name cleaner and simplifier)}
 \description{
-Limpa e simplifica nomes de pessoas para auxiliar no pareamento de banco de dados na ausência de chaves únicas não ambíguas. Detecta e corrige erros tipográficos mais comuns, simplifica opcionalmente termos sujeitos eventualmente a omissão em cadastros, e simplifica foneticamente suas palavras, aplicando variação própria do algoritmo metaphoneBR. (Cleans and simplifies personal names to assist in database matching when unambiguous unique keys are unavailable. Detects and corrects common typos, optionally simplifies terms prone to omission in records, and applies phonetic simplification using a custom variation of the metaphoneBR algorithm.)
+Limpa e simplifica nomes de pessoas para auxiliar no pareamento de banco de dados na ausência de chaves únicas não ambíguas. Detecta e corrige erros tipográficos mais comuns, simplifica opcionalmente termos sujeitos eventualmente a omissão em cadastros, e simplifica foneticamente suas palavras, aplicando variação própria do algoritmo metaphoneBR. (Cleans and simplifies personal names to assist in database matching when unambiguous unique keys are unavailable. Detects and corrects common typos, optionally simplifies terms prone to omission in records, and applies phonetic simplification using a custom variation of the metaphoneBR algorithm.) Mation (2025) \doi{10.6082/uchicago.15104}.
 }
 \seealso{
 Useful links:
@@ -24,6 +24,11 @@ Authors:
 \itemize{
   \item Pedro Cavalcanti G. Ferreira (\href{https://orcid.org/0000-0002-8540-1860}{ORCID})
   \item Lucas Mation (\href{https://orcid.org/0000-0002-7461-932X}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Ipea - Institue for Applied Economic Research [copyright holder, funder]
 }
 
 }

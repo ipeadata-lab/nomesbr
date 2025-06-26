@@ -1,4 +1,10 @@
 
+if (requireNamespace("mockery", quietly = TRUE)) {
+  library(mockery)
+} else {
+  message("mockery not available, some tests might be skipped or not run as intended.")
+}
+
 nomesteste <- c("PEDRO SANT ANA MOURAO FALECIDO","JJOSE D ACQUA","NAO CONSTA NADA"," TESTE ",
                 "CORONEL JACINTO CUNHA",
                 "MARIA DO SOCORRO SILVA DE OLIVEIRA")
