@@ -15,3 +15,8 @@ Vetor de caracteres com nomes simplificados.
 \description{
 Remove Partículas, Agnomes e algumas Patentes de Nomes
 }
+\examples{
+# vct_nomes <- c("JOAO DA SILVA FILHO","CORONEL JACINTO")
+# remove_PARTICULAS_AGNOMES(vct_nomes)
+
+}

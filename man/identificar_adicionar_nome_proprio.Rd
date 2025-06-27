@@ -20,3 +20,10 @@ O `data.table` `dt` com colunas `_v2` adicionadas.
 \description{
 Adiciona Nome Próprio Validado com Base em `nomes_proprios_compostos` `np2`
 }
+\examples{
+\dontrun{
+# dt_nomes <- data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA","JOSE DAS FLORES"))
+# dt_nomes <- identificar_adicionar_nome_proprio(dt_nomes,"nome")
+# print(dt_nomes)
+}
+}

@@ -1,7 +1,7 @@
 Package: nomesbr
 Type: Package
-Title: Limpador e simplificador de nomes de pessoas (Person name cleaner and simplifier)
-Version: 0.0.5
+Title: Limpa e simplifica nomes de pessoas (name cleaner and simplifier)
+Version: 0.0.6
 Authors@R: c(
     person(
       "Rodrigo", "Borges",
@@ -25,7 +25,7 @@ Description: Limpa e simplifica nomes de pessoas para auxiliar no pareamento
     corrige erros tipográficos mais comuns, simplifica opcionalmente termos
     sujeitos eventualmente a omissão em cadastros, e simplifica foneticamente 
     suas palavras, aplicando variação própria do algoritmo metaphoneBR.
-    (Cleans and simplifies personal names to assist in database matching when 
+    (Cleans and simplifies person names to assist in database matching when 
     unambiguous unique keys are unavailable. Detects and corrects common 
     typos, optionally simplifies terms prone to omission in records, and 
     applies phonetic simplification using a custom variation of the metaphoneBR 

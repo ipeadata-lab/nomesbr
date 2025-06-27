@@ -3,6 +3,10 @@
 #' @return Vetor de caracteres com nomes simplificados.
 #' @export
 #' @importFrom stringr str_replace_all
+#' @examples
+#' # vct_nomes <- c("JOAO DA SILVA FILHO","CORONEL JACINTO")
+#' # remove_PARTICULAS_AGNOMES(vct_nomes)
+#' 
 remove_PARTICULAS_AGNOMES <- function(s){
   s |> stringr::str_replace_all(regex_nome_EDADEDOS, " ") |> 
     stringr::str_replace_all(regex_nome_AGNOMES, '')|>
@@ -15,11 +19,17 @@ remove_PARTICULAS_AGNOMES <- function(s){
 
 #' Cria coluna com agnomes, algumas patentes/cargos as remove, remove partículas
 #' @param d um objeto `data.table`
-#' @param s Vetor de caracteres contendo nomes para simplificar. Padrão nome_clean.
-#' @return Vetor de caracteres com nomes simplificados.
+#' @param s string com nome da coluna de caracteres contendo nomes para simplificar. Padrão nome_clean.
+#' @return data.table com novas colunas de nome simplificado e dummy marca de deteccção de agnomes_titulos
+#' 
 #' @export
 #' @import data.table
 #' @importFrom stringr str_replace_all str_extract
+#' @examples
+#' # dt_nomes <- data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
+#' # dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
+#' # print(dt_nomes)
+#' 
 simplifica_PARTICULAS_AGNOMES_PATENTES <- function(d,s="nome_clean"){
   tictoc::tic('Starting - All substeps')
   tictoc::tic('0. Making copy of dataset and add the s2(the var to be cleaned)')
@@ -62,6 +72,11 @@ simplifica_PARTICULAS_AGNOMES_PATENTES <- function(d,s="nome_clean"){
 #' @export
 #' @import data.table
 #' @importFrom stringr str_detect
+#' @examples
+#' # dt_nomes <- data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA"))
+#' # dt_nomes <- segmentar_nomes(dt_nomes,"nome)
+#' # print(dt_nomes)
+#' 
 segmentar_nomes <- function(dt, s){
   s1     <- paste0(s, "_w1")
   s2     <- paste0(s, "_w2")
@@ -90,6 +105,12 @@ add_string_w1_w2_w3_and_w2p <- segmentar_nomes
 #' @export
 #' @import data.table
 #' @importFrom stringr str_detect
+#' @examples
+#' \dontrun{
+#' # dt_nomes <- data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA","JOSE DAS FLORES"))
+#' # dt_nomes <- identificar_adicionar_nome_proprio(dt_nomes,"nome")
+#' # print(dt_nomes)
+#' }
 identificar_adicionar_nome_proprio <- function(dt, s) {
   np2 <- readRDS(obter_dic_nomes_proprios_compostos())
   # Build dt key names
@@ -135,6 +156,7 @@ identificar_adicionar_nome_proprio <- function(dt, s) {
 
 #' @rdname identificar_adicionar_nome_proprio
 #' @export
+
 add_nome_proprio_to_word1_and_word2p <- identificar_adicionar_nome_proprio
 
 

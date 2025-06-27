@@ -1,3 +1,7 @@
+# nomesbr 0.0.6
+
+* submit to cran
+
 # nomesbr 0.0.5
 
 * fix s2 column created with limpar_nomes
