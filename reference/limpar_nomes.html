@@ -94,12 +94,41 @@ menções a "FALECIDO", "CARTORIO", erros de digitação, espaços indevidos, et
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Supondo que 'meu_DT' é um data.table com uma coluna 'nome_sujo'</span></span></span>
-<span class="r-in"><span><span class="co"># DT_exemplo &lt;- data.table::data.table(</span></span></span>
-<span class="r-in"><span><span class="co">#   id = 1:3,</span></span></span>
-<span class="r-in"><span><span class="co">#   nome_sujo = c("MARIA FALECIDA SSILVA", "CARTORIO DE PAZ", "JOAO D ARC")</span></span></span>
-<span class="r-in"><span><span class="co"># )</span></span></span>
-<span class="r-in"><span><span class="co"># DT_limpo &lt;- limpar_nomes(DT_exemplo, "nome_sujo")</span></span></span>
-<span class="r-in"><span><span class="co"># print(DT_limpo)</span></span></span>
+<span class="r-in"><span><span class="va">DT_exemplo</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span></span>
+<span class="r-in"><span>nome_sujo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MARIA FALECIDA SSILVA"</span>, <span class="st">"CARTORIO DE PAZ"</span>, <span class="st">"JOAO D ARC"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">DT_limpo</span> <span class="op">&lt;-</span> <span class="fu">limpar_nomes</span><span class="op">(</span><span class="va">DT_exemplo</span>, <span class="st">"nome_sujo"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0. Making copy of dataset and add the s2(the var to be cleaned): 0.006 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. Detect and clean "FALECIDO/A" (and variants): 0.111 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2. Detect and clean "CARTORIO" cases: 0.003 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3. Identify cases with extra spaces before accented letters, tilde and apostrophe: 0.005 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4. Detect: PAI MAE SEM NAO and fix: 0.003 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5. Detect "NADA_NAO" and "CONSTA" cases, and make their combo NA: 0.004 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6. Detect Xartigo and replace when unambigous (ex: DDE to DE): 0.001 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7. Detect and clean SR_SRA and variants: 0.001 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8. Detect and clean desconhecido ignorado and variants: 0.001 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9. Detect and clean repeated de de da da do do : 0.002 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10. Detect and clean repeated letters with specific rules whether at beginning or middle of the word: 0.003 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11. Force NA if resulting cleaned name is empty or spaces: 0.001 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> All substeps: 0.142 sec elapsed</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">DT_limpo</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Index: &lt;espaco_TilAcentoApostrofe&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       id             nome_sujo      nome_sujo_clean falecido cartorio</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;int&gt;                &lt;char&gt;               &lt;char&gt;   &lt;lgcl&gt;   &lt;lgcl&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     1 MARIA FALECIDA SSILVA MARIA FALECIDA SILVA     TRUE    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     2       CARTORIO DE PAZ                 &lt;NA&gt;    FALSE     TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:     3            JOAO D ARC            JOAO DARC    FALSE    FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    espaco_TilAcentoApostrofe nome_P_M_S_N nada_nao consta nada_nao_consta</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       &lt;lgcl&gt;       &lt;lgcl&gt;   &lt;lgcl&gt; &lt;lgcl&gt;          &lt;lgcl&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:                     FALSE        FALSE    FALSE  FALSE              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:                        NA           NA       NA     NA              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:                      TRUE        FALSE    FALSE  FALSE              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    nada_nao_consta2 Xartigo sr_sra ignorado dede_dada letra_repetida</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              &lt;lgcl&gt;  &lt;lgcl&gt; &lt;lgcl&gt;   &lt;lgcl&gt;    &lt;lgcl&gt;         &lt;lgcl&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:               NA   FALSE  FALSE    FALSE     FALSE           TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:               NA      NA     NA       NA     FALSE             NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:               NA   FALSE  FALSE    FALSE     FALSE          FALSE</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

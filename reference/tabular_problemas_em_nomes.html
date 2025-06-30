@@ -76,9 +76,31 @@ tipo de problema detectado pela função `marcar_problemas_e_limpar_nomes`.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Supondo que DT_limpo é o resultado de marcar_problemas_e_limpar_nomes(DT, "nome_sujo")</span></span></span>
-<span class="r-in"><span><span class="co"># sumario &lt;- tabular_problemas_em_nomes(DT_limpo, "nome_sujo")</span></span></span>
-<span class="r-in"><span><span class="co"># print(sumario)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">DT_limpo</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span>nome <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"JOSEE SILVA"</span>, <span class="st">"RAIMUNDA DA DA SILVA"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>nome_clean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"JOSE SILVA"</span>,<span class="st">"RAIMUNDA DA SILVA"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>falecido <span class="op">=</span> <span class="cn">NA</span>, cartorio <span class="op">=</span> <span class="cn">NA</span>, </span></span>
+<span class="r-in"><span>espaco_TilAcentoApostrofe <span class="op">=</span> <span class="cn">NA</span>, </span></span>
+<span class="r-in"><span>nome_P_M_S_N <span class="op">=</span> <span class="cn">NA</span>, nada_nao <span class="op">=</span> <span class="cn">NA</span>, </span></span>
+<span class="r-in"><span>nada_nao_consta2 <span class="op">=</span> <span class="cn">NA</span>, final_missing <span class="op">=</span> <span class="cn">NA</span>, Xartigo <span class="op">=</span> <span class="cn">NA</span>, sr_sra <span class="op">=</span> <span class="cn">NA</span>,</span></span>
+<span class="r-in"><span>ignorado <span class="op">=</span> <span class="cn">NA</span>, dededada <span class="op">=</span> <span class="fl">1</span>, letra_repetida <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sumario</span> <span class="op">&lt;-</span> <span class="fu">tabular_problemas_em_nomes</span><span class="op">(</span><span class="va">DT_limpo</span>, <span class="st">"nome"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sumario</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     condition N_detected N_made_NA N_replaced</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        &lt;char&gt;      &lt;int&gt;     &lt;int&gt;      &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1:                  falecido          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                  cartorio          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: espaco_TilAcentoApostrofe          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4:              nome_P_M_S_N          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                  nada_nao          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6:                    consta          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7:           nada_nao_consta          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8:          nada_nao_consta2          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9:             final_missing          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10:                   Xartigo          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11:                    sr_sra          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12:                  ignorado          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13:                 dede_dada          0         0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14:            letra_repetida          2         0          2</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
