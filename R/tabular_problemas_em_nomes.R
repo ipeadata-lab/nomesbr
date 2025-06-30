@@ -17,9 +17,15 @@
 #' @export
 #' @import data.table
 #' @examples
-#' # Supondo que DT_limpo é o resultado de marcar_problemas_e_limpar_nomes(DT, "nome_sujo")
-#' # sumario <- tabular_problemas_em_nomes(DT_limpo, "nome_sujo")
-#' # print(sumario)
+#' DT_limpo <- data.table::data.table(nome = c("JOSEE SILVA", "RAIMUNDA DA DA SILVA"),
+#' nome_clean = c("JOSE SILVA","RAIMUNDA DA SILVA"),
+#' falecido = NA, cartorio = NA, 
+#' espaco_TilAcentoApostrofe = NA, 
+#' nome_P_M_S_N = NA, nada_nao = NA, 
+#' nada_nao_consta2 = NA, final_missing = NA, Xartigo = NA, sr_sra = NA,
+#' ignorado = NA, dededada = 1, letra_repetida = 1)
+#' sumario <- tabular_problemas_em_nomes(DT_limpo, "nome")
+#' print(sumario)
 tabular_problemas_em_nomes <- function(d, s) {
   # Determine the name of the cleaned variable (e.g., if s = "nome", then s_clean = "nome_clean")
   s_clean <- paste0(s, "_clean")

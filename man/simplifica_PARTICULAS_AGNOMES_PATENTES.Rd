@@ -18,8 +18,8 @@ data.table com novas colunas de nome simplificado e dummy marca de deteccção d
 Cria coluna com agnomes, algumas patentes/cargos as remove, remove partículas
 }
 \examples{
-# dt_nomes <- data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
-# dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
-# print(dt_nomes)
+dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
+dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
+print(dt_nomes)
 
 }

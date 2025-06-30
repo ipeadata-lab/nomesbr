@@ -21,8 +21,8 @@ O `data.table` `dt` modificado por referência, com novas colunas.
 Adiciona Colunas com Partes do Nome (w1, w2, w3, w2p, w12p)
 }
 \examples{
-# dt_nomes <- data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA"))
-# dt_nomes <- segmentar_nomes(dt_nomes,"nome)
-# print(dt_nomes)
+dt_nomes <- data.table::data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA"))
+dt_nomes <- segmentar_nomes(dt_nomes,"nome")
+print(dt_nomes)
 
 }

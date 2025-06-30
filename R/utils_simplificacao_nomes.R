@@ -4,8 +4,8 @@
 #' @export
 #' @importFrom stringr str_replace_all
 #' @examples
-#' # vct_nomes <- c("JOAO DA SILVA FILHO","CORONEL JACINTO")
-#' # remove_PARTICULAS_AGNOMES(vct_nomes)
+#' vct_nomes <- c("JOAO DA SILVA FILHO","CORONEL JACINTO")
+#' remove_PARTICULAS_AGNOMES(vct_nomes)
 #' 
 remove_PARTICULAS_AGNOMES <- function(s){
   s |> stringr::str_replace_all(regex_nome_EDADEDOS, " ") |> 
@@ -26,9 +26,9 @@ remove_PARTICULAS_AGNOMES <- function(s){
 #' @import data.table
 #' @importFrom stringr str_replace_all str_extract
 #' @examples
-#' # dt_nomes <- data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
-#' # dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
-#' # print(dt_nomes)
+#' dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
+#' dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
+#' print(dt_nomes)
 #' 
 simplifica_PARTICULAS_AGNOMES_PATENTES <- function(d,s="nome_clean"){
   tictoc::tic('Starting - All substeps')
@@ -73,9 +73,9 @@ simplifica_PARTICULAS_AGNOMES_PATENTES <- function(d,s="nome_clean"){
 #' @import data.table
 #' @importFrom stringr str_detect
 #' @examples
-#' # dt_nomes <- data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA"))
-#' # dt_nomes <- segmentar_nomes(dt_nomes,"nome)
-#' # print(dt_nomes)
+#' dt_nomes <- data.table::data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA"))
+#' dt_nomes <- segmentar_nomes(dt_nomes,"nome")
+#' print(dt_nomes)
 #' 
 segmentar_nomes <- function(dt, s){
   s1     <- paste0(s, "_w1")
@@ -107,9 +107,9 @@ add_string_w1_w2_w3_and_w2p <- segmentar_nomes
 #' @importFrom stringr str_detect
 #' @examples
 #' \dontrun{
-#' # dt_nomes <- data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA","JOSE DAS FLORES"))
-#' # dt_nomes <- identificar_adicionar_nome_proprio(dt_nomes,"nome")
-#' # print(dt_nomes)
+#' dt_nomes <- data.table::data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA","JOSE DAS FLORES"))
+#' dt_nomes <- identificar_adicionar_nome_proprio(dt_nomes,"nome")
+#' print(dt_nomes)
 #' }
 identificar_adicionar_nome_proprio <- function(dt, s) {
   np2 <- readRDS(obter_dic_nomes_proprios_compostos())

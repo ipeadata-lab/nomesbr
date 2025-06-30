@@ -35,12 +35,12 @@
 #' @importFrom dplyr na_if
 #' @examples
 #' # Supondo que 'meu_DT' é um data.table com uma coluna 'nome_sujo'
-#' # DT_exemplo <- data.table::data.table(
-#' #   id = 1:3,
-#' #   nome_sujo = c("MARIA FALECIDA SSILVA", "CARTORIO DE PAZ", "JOAO D ARC")
-#' # )
-#' # DT_limpo <- limpar_nomes(DT_exemplo, "nome_sujo")
-#' # print(DT_limpo)
+#' DT_exemplo <- data.table::data.table(
+#' id = 1:3,
+#' nome_sujo = c("MARIA FALECIDA SSILVA", "CARTORIO DE PAZ", "JOAO D ARC")
+#' )
+#' DT_limpo <- limpar_nomes(DT_exemplo, "nome_sujo")
+#' print(DT_limpo)
 #' 
 limpar_nomes <- \(d, s) {
   
