@@ -11,3 +11,4 @@
 ^pkgdown$
 ^\.github$
 ^pkgdown/_pkgdown\.yml$
+^CRAN-SUBMISSION$
