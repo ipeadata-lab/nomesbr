@@ -4,7 +4,7 @@
 \name{nomesbr-package}
 \alias{nomesbr}
 \alias{nomesbr-package}
-\title{nomesbr: Limpa e simplifica nomes de pessoas (name cleaner and simplifier)}
+\title{nomesbr: Limpa e Simplifica Nomes de Pessoas (Name Cleaner and Simplifier)}
 \description{
 Limpa e simplifica nomes de pessoas para auxiliar no pareamento de banco de dados na ausência de chaves únicas não ambíguas. Detecta e corrige erros tipográficos mais comuns, simplifica opcionalmente termos sujeitos eventualmente a omissão em cadastros, e simplifica foneticamente suas palavras, aplicando variação própria do algoritmo metaphoneBR. (Cleans and simplifies person names to assist in database matching when unambiguous unique keys are unavailable. Detects and corrects common typos, optionally simplifies terms prone to omission in records, and applies phonetic simplification using a custom variation of the metaphoneBR algorithm.) Mation (2025) \doi{10.6082/uchicago.15104}.
 }

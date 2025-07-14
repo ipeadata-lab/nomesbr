@@ -1,6 +1,6 @@
 Package: nomesbr
 Type: Package
-Title: Limpa e simplifica nomes de pessoas (name cleaner and simplifier)
+Title: Limpa e Simplifica Nomes de Pessoas (Name Cleaner and Simplifier)
 Version: 0.0.6
 Authors@R: c(
     person(

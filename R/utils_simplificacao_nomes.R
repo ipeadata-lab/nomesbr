@@ -106,7 +106,7 @@ add_string_w1_w2_w3_and_w2p <- segmentar_nomes
 #' @import data.table
 #' @importFrom stringr str_detect
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' dt_nomes <- data.table::data.table(nome=c("MARIA DO SOCORRO SILVA",
 #' "ANA PAULA DE OLIVEIRA","JOSE DAS FLORES"))
 #' dt_nomes <- identificar_adicionar_nome_proprio(dt_nomes,"nome")
