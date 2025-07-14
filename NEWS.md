@@ -1,3 +1,7 @@
+# nomesbr 0.0.7
+
+* fixes to package documentation as requested for cran resubmission
+
 # nomesbr 0.0.6
 
 * submit to cran
