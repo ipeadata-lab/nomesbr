@@ -79,12 +79,15 @@ menções a "FALECIDO", "CARTORIO", erros de digitação, espaços indevidos, et
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>A função executa os seguintes passos principais:</p><ol><li><p>Cria uma cópia da coluna de nomes para limpeza.</p></li>
 <li><p>Detecta e trata menções a "FALECIDO(A)".</p></li>
-<li><p>Detecta e trata menções a "CARTORIO" e nomes de cidades comuns em registros.</p></li>
-<li><p>Corrige problemas de espaçamento perto de acentos, til e apóstrofes usando `limpa_espaco_acento_til_apostrofe`.</p></li>
-<li><p>Identifica e trata nomes contendo termos problemáticos como "PAI", "MAE", "SEM", "NAO",
-        exceto em contextos aceitáveis.</p></li>
+<li><p>Detecta e trata menções a "CARTORIO" e nomes de cidades comuns em
+  registros.</p></li>
+<li><p>Corrige espaçamento perto de caracteres especiais
+  com `limpa_espaco_acento_til_apostrofe`.</p></li>
+<li><p>Identifica e trata nomes contendo termos problemáticos como "PAI",
+  "MAE", "SEM", "NAO", exceto em contextos aceitáveis.</p></li>
 <li><p>Identifica e trata casos de "NADA CONSTA" e variações.</p></li>
-<li><p>Corrige E, DA, DE e variantes com caracter prévio indevido (ex: "EDAS" para "DAS" se aplicável).</p></li>
+<li><p>Corrige E, DA, DE e variantes com caracter prévio indevido
+  (ex: "EDAS" para "DAS" se aplicável).</p></li>
 <li><p>Remove saudações como "SR.", "SRA.".</p></li>
 <li><p>Remove termos como "IGNORADO", "DESCONHECIDO".</p></li>
 <li><p>Remove repetições de partículas de ligação (ex: "DE DE").</p></li>
@@ -100,18 +103,18 @@ menções a "FALECIDO", "CARTORIO", erros de digitação, espaços indevidos, et
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">DT_limpo</span> <span class="op">&lt;-</span> <span class="fu">limpar_nomes</span><span class="op">(</span><span class="va">DT_exemplo</span>, <span class="st">"nome_sujo"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0. Making copy of dataset and add the s2(the var to be cleaned): 0.001 sec elapsed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1. Detect and clean "FALECIDO/A" (and variants): 0.104 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. Detect and clean "FALECIDO/A" (and variants): 0.048 sec elapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2. Detect and clean "CARTORIO" cases: 0.003 sec elapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3. Identify cases with extra spaces before accented letters, tilde and apostrophe: 0.005 sec elapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4. Detect: PAI MAE SEM NAO and fix: 0.003 sec elapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5. Detect "NADA_NAO" and "CONSTA" cases, and make their combo NA: 0.005 sec elapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6. Detect Xartigo and replace when unambigous (ex: DDE to DE): 0.001 sec elapsed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7. Detect and clean SR_SRA and variants: 0.001 sec elapsed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8. Detect and clean desconhecido ignorado and variants: 0.002 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7. Detect and clean SR_SRA and variants: 0.002 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8. Detect and clean desconhecido ignorado and variants: 0.001 sec elapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9. Detect and clean repeated de de da da do do : 0.003 sec elapsed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10. Detect and clean repeated letters with specific rules whether at beginning or middle of the word: 0.003 sec elapsed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11. Force NA if resulting cleaned name is empty or spaces: 0.001 sec elapsed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> All substeps: 0.132 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10. Detect and clean repeated letters with specific rules whether at beginning or middle of the word: 0.004 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11. Force NA if resulting cleaned name is empty or spaces: 0 sec elapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> All substeps: 0.076 sec elapsed</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">DT_limpo</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Index: &lt;espaco_TilAcentoApostrofe&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       id             nome_sujo      nome_sujo_clean falecido cartorio</span>
