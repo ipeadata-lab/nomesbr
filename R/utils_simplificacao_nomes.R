@@ -19,14 +19,16 @@ remove_PARTICULAS_AGNOMES <- function(s){
 
 #' Cria coluna com agnomes, algumas patentes/cargos as remove, remove partículas
 #' @param d um objeto `data.table`
-#' @param s string com nome da coluna de caracteres contendo nomes para simplificar. Padrão nome_clean.
-#' @return data.table com novas colunas de nome simplificado e dummy marca de deteccção de agnomes_titulos
-#' 
+#' @param s string com nome da coluna de caracteres contendo nomes para 
+#' simplificar. Por padrão, "nome_clean".
+#' @return data.table com novas colunas de nome simplificado e de marca  
+#' agnomes_titulos
 #' @export
 #' @import data.table
 #' @importFrom stringr str_replace_all str_extract
 #' @examples
-#' dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
+#' dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO",
+#' "CORONEL JACINTO"))
 #' dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
 #' print(dt_nomes)
 #' 
@@ -73,7 +75,8 @@ simplifica_PARTICULAS_AGNOMES_PATENTES <- function(d,s="nome_clean"){
 #' @import data.table
 #' @importFrom stringr str_detect
 #' @examples
-#' dt_nomes <- data.table::data.table(nome=c("MARIA DO SOCORRO SILVA","ANA PAULA DE OLIVEIRA"))
+#' dt_nomes <- data.table::data.table(nome=c("MARIA DO SOCORRO SILVA",
+#' "ANA PAULA DE OLIVEIRA"))
 #' dt_nomes <- segmentar_nomes(dt_nomes,"nome")
 #' print(dt_nomes)
 #' 
@@ -98,9 +101,10 @@ add_string_w1_w2_w3_and_w2p <- segmentar_nomes
 
 
 
-#' Adiciona Nome Próprio Validado com Base em `nomes_proprios_compostos` `np2`
+#' Adiciona Nome Próprio Validado de `nomes_proprios_compostos` .
 #' @param dt Um `data.table`.
-#' @param s Nome da coluna (string) base para derivação das colunas de palavras (ex: se `s = "nome_simpl"`, espera `nome_simpl1`, `nome_simpl2p`).
+#' @param s Nome da coluna (string) base para derivação das colunas de palavras
+#' (por exemplo, se `s = "nome_simpl"`, espera `nome_simpl1`, `nome_simpl2p`).
 #' @return O `data.table` `dt` com colunas `_v2` adicionadas.
 #' @export
 #' @import data.table

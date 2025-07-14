@@ -2,7 +2,9 @@
 % Please edit documentation in R/utils_download_nomes_compostos.R
 \name{obter_dic_nomes_proprios_compostos}
 \alias{obter_dic_nomes_proprios_compostos}
-\title{Recupera o dataset nomes_proprios_compostos, baixando-o se necessário}
+\title{Carrega o dataset nomes_proprios_compostos 
+Verifica se o dataset nomes_proprios_compostos existe em uma pasta de cache local.
+Se inexistir, baixa-o de um release do GitHub e o salva no cache.}
 \usage{
 obter_dic_nomes_proprios_compostos()
 }
@@ -10,6 +12,7 @@ obter_dic_nomes_proprios_compostos()
 Um data.table contendo os dados de nomes_proprios_compostos.
 }
 \description{
+Carrega o dataset nomes_proprios_compostos 
 Verifica se o dataset nomes_proprios_compostos existe em uma pasta de cache local.
 Se inexistir, baixa-o de um release do GitHub e o salva no cache.
 }

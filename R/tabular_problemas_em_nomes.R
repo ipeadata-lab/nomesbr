@@ -17,8 +17,9 @@
 #' @export
 #' @import data.table
 #' @examples
-#' DT_limpo <- data.table::data.table(nome = c("JOSEE SILVA", "RAIMUNDA DA DA SILVA"),
-#' nome_clean = c("JOSE SILVA","RAIMUNDA DA SILVA"),
+#' DT_limpo <- data.table::data.table(nome = c("JOSEE SILVA", 
+#' "RAIMUNDA DA DA SILVA"), nome_clean = c("JOSE SILVA",
+#' "RAIMUNDA DA SILVA"),
 #' falecido = NA, cartorio = NA, 
 #' espaco_TilAcentoApostrofe = NA, 
 #' nome_P_M_S_N = NA, nada_nao = NA, 

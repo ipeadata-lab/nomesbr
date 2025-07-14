@@ -9,16 +9,19 @@ simplifica_PARTICULAS_AGNOMES_PATENTES(d, s = "nome_clean")
 \arguments{
 \item{d}{um objeto `data.table`}
 
-\item{s}{string com nome da coluna de caracteres contendo nomes para simplificar. Padrão nome_clean.}
+\item{s}{string com nome da coluna de caracteres contendo nomes para 
+simplificar. Por padrão, "nome_clean".}
 }
 \value{
-data.table com novas colunas de nome simplificado e dummy marca de deteccção de agnomes_titulos
+data.table com novas colunas de nome simplificado e de marca  
+agnomes_titulos
 }
 \description{
 Cria coluna com agnomes, algumas patentes/cargos as remove, remove partículas
 }
 \examples{
-dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO","CORONEL JACINTO"))
+dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO",
+"CORONEL JACINTO"))
 dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
 print(dt_nomes)
 

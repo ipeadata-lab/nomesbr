@@ -1,8 +1,6 @@
-#' Recupera o dataset nomes_proprios_compostos, baixando-o se necessário
-#'
+#' Carrega o dataset nomes_proprios_compostos 
 #' Verifica se o dataset nomes_proprios_compostos existe em uma pasta de cache local.
 #' Se inexistir, baixa-o de um release do GitHub e o salva no cache.
-#'
 #' @return Um data.table contendo os dados de nomes_proprios_compostos.
 #' @keywords internal
 #' @importFrom tools R_user_dir

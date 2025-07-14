@@ -17,12 +17,15 @@
 #' \enumerate{
 #'   \item Cria uma cópia da coluna de nomes para limpeza.
 #'   \item Detecta e trata menções a "FALECIDO(A)".
-#'   \item Detecta e trata menções a "CARTORIO" e nomes de cidades comuns em registros.
-#'   \item Corrige problemas de espaçamento perto de acentos, til e apóstrofes usando `limpa_espaco_acento_til_apostrofe`.
-#'   \item Identifica e trata nomes contendo termos problemáticos como "PAI", "MAE", "SEM", "NAO",
-#'         exceto em contextos aceitáveis.
+#'   \item Detecta e trata menções a "CARTORIO" e nomes de cidades comuns em 
+#'   registros.
+#'   \item Corrige espaçamento perto de caracteres especiais  
+#'   com `limpa_espaco_acento_til_apostrofe`.
+#'   \item Identifica e trata nomes contendo termos problemáticos como "PAI", 
+#'   "MAE", "SEM", "NAO", exceto em contextos aceitáveis.
 #'   \item Identifica e trata casos de "NADA CONSTA" e variações.
-#'   \item Corrige E, DA, DE e variantes com caracter prévio indevido (ex: "EDAS" para "DAS" se aplicável).
+#'   \item Corrige E, DA, DE e variantes com caracter prévio indevido 
+#'   (ex: "EDAS" para "DAS" se aplicável).
 #'   \item Remove saudações como "SR.", "SRA.".
 #'   \item Remove termos como "IGNORADO", "DESCONHECIDO".
 #'   \item Remove repetições de partículas de ligação (ex: "DE DE").
