@@ -27,8 +27,7 @@ records.)
 
 ## Instalação
 
-O pacote está em processo de submissão ao CRAN. Quando aceito, a versão
-estável poderá ser instalada com:
+A versão estável do pacote pode ser instalada com:
 
 ``` r
 install.packages("nomesbr")
