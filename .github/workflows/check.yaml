@@ -5,12 +5,12 @@ on:
     branches: [main, master]
   pull_request:
 
-name: R-CMD-check.yaml
+name: check
 
 permissions: read-all
 
 jobs:
-  R-CMD-check:
+  check:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
