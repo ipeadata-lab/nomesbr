@@ -184,8 +184,6 @@ NA_orig         <- c(NA_consta,NA_cadastrado,NA_declarado,NA_informado,NA_regist
 
 
 
-#FOI|NA|NO|EM|A|O
-#'ADA CONSTA'
 
 NA_strings <- c(NA_nada_nao_consta,NA_nada_nao_cadast,NA_nada_nao_declar,NA_nada_nao_inform,NA_nada_nao_regist,
                 NA_ignorado,NA_outros) |> paste0(collapse = '|')
