@@ -1,9 +1,9 @@
 ## Resubmission
 
-This is a resubmission. In this version I have:
+This is a resubmission. 
 
-* Adjusted package  title to title case 
-* replaced \dontrun with \donttest where requested
+* patched error rebuilding vignettes on windows oldrel
+* Changes passed checks as per https://win-builder.r-project.org/ChfjMxnrlOKQ/00check.log
 
 ## R CMD check results
 
