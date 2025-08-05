@@ -1,3 +1,7 @@
+# nomesbr 0.0.9
+
+* fix authors DESCRIPTION
+
 # nomesbr 0.0.8
 
 * fixes package doc vignette rebuilding error in windows olrdel as per https://cran.rstudio.org/web/checks/check_results_nomesbr.html

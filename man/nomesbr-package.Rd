@@ -22,7 +22,6 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Pedro Cavalcanti G. Ferreira (\href{https://orcid.org/0000-0002-8540-1860}{ORCID})
   \item Lucas Mation (\href{https://orcid.org/0000-0002-7461-932X}{ORCID})
 }
 
