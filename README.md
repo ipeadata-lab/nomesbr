@@ -10,6 +10,9 @@ coverage](https://codecov.io/gh/ipeadata-lab/nomesbr/graph/badge.svg)](https://a
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/nomesbr?color=blue)](https://CRAN.R-project.org/package=nomesbr)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
 ## nomesbr
