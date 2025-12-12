@@ -16,13 +16,13 @@ Source:
 [`DESCRIPTION`](https://github.com/ipeadata-lab/nomesbr/blob/main/DESCRIPTION)
 
 Borges R, Mation L (2025). *nomesbr: Limpa e Simplifica Nomes de Pessoas
-(Name Cleaner and Simplifier)*. R package version 0.0.9,
+(Name Cleaner and Simplifier)*. R package version 0.1.0,
 <https://github.com/ipeadata-lab/nomesbr>.
 
     @Manual{,
       title = {nomesbr: Limpa e Simplifica Nomes de Pessoas (Name Cleaner and Simplifier)},
       author = {Rodrigo Borges and Lucas Mation},
       year = {2025},
-      note = {R package version 0.0.9},
+      note = {R package version 0.1.0},
       url = {https://github.com/ipeadata-lab/nomesbr},
     }

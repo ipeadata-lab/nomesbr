@@ -71,18 +71,18 @@ nome_sujo = c("MARIA FALECIDA SSILVA", "CARTORIO DE PAZ", "JOAO D ARC")
 )
 DT_limpo <- limpar_nomes(DT_exemplo, "nome_sujo")
 #> 0. Making copy of dataset and add the s2(the var to be cleaned): 0.001 sec elapsed
-#> 1. Detect and clean "FALECIDO/A" (and variants): 0.004 sec elapsed
-#> 2. Detect and clean "CARTORIO" cases: 0.002 sec elapsed
-#> 3. Identify cases with extra spaces before accented letters, tilde and apostrophe: 0.005 sec elapsed
+#> 1. Detect and clean "FALECIDO/A" (and variants): 0.012 sec elapsed
+#> 2. Detect and clean "CARTORIO" cases: 0.003 sec elapsed
+#> 3. Identify cases with extra spaces before accented letters, tilde and apostrophe: 0.004 sec elapsed
 #> 4. Detect: PAI MAE SEM NAO and fix: 0.003 sec elapsed
-#> 5. Detect "NADA_NAO" and "CONSTA" cases, and make their combo NA: 0.005 sec elapsed
-#> 6. Detect Xartigo and replace when unambigous (ex: DDE to DE): 0.001 sec elapsed
-#> 7. Detect and clean SR_SRA and variants: 0.002 sec elapsed
-#> 8. Detect and clean desconhecido ignorado and variants: 0.001 sec elapsed
+#> 5. Detect "NADA_NAO" and "CONSTA" cases, and make their combo NA: 0.004 sec elapsed
+#> 6. Detect Xartigo and replace when unambigous (ex: DDE to DE): 0.002 sec elapsed
+#> 7. Detect and clean SR_SRA and variants: 0.001 sec elapsed
+#> 8. Detect and clean desconhecido ignorado and variants: 0.002 sec elapsed
 #> 9. Detect and clean repeated de de da da do do : 0.003 sec elapsed
-#> 10. Detect and clean repeated letters with specific rules whether at beginning or middle of the word: 0.004 sec elapsed
-#> 11. Force NA if resulting cleaned name is empty or spaces: 0 sec elapsed
-#> All substeps: 0.031 sec elapsed
+#> 10. Detect and clean repeated letters with specific rules whether at beginning or middle of the word: 0.003 sec elapsed
+#> 11. Force NA if resulting cleaned name is empty or spaces: 0.001 sec elapsed
+#> All substeps: 0.04 sec elapsed
 print(DT_limpo)
 #> Index: <espaco_TilAcentoApostrofe>
 #>       id             nome_sujo      nome_sujo_clean falecido cartorio

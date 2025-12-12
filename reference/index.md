@@ -2,6 +2,8 @@
 
 ## All functions
 
+- [`consulta_nome_em_central()`](https://ipeadata-lab.github.io/nomesbr/reference/consulta_nome_em_central.md)
+  : Consulta Nomes em uma Base de Dados DuckDB
 - [`identificar_adicionar_nome_proprio()`](https://ipeadata-lab.github.io/nomesbr/reference/identificar_adicionar_nome_proprio.md)
   [`add_nome_proprio_to_word1_and_word2p()`](https://ipeadata-lab.github.io/nomesbr/reference/identificar_adicionar_nome_proprio.md)
   : Adiciona Nome Próprio Validado de \`nomes_proprios_compostos\` .
