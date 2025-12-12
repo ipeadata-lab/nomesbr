@@ -1,3 +1,8 @@
+# nomesbr 0.1.0
+
+* Adds function for querying to master names db
+
+
 # nomesbr 0.0.9
 
 * fix authors DESCRIPTION

@@ -2,6 +2,7 @@
 
 export(add_nome_proprio_to_word1_and_word2p)
 export(add_string_w1_w2_w3_and_w2p)
+export(consulta_nome_em_central)
 export(find_and_clean_NAnames_and_extra_spaces)
 export(identificar_adicionar_nome_proprio)
 export(limpar_nomes)

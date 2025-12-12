@@ -1,7 +1,7 @@
 Package: nomesbr
 Type: Package
 Title: Limpa e Simplifica Nomes de Pessoas (Name Cleaner and Simplifier)
-Version: 0.0.9
+Version: 0.1.0
 Authors@R: c(
     person(
       "Rodrigo", "Borges",
@@ -39,6 +39,9 @@ Imports:
     tictoc
 Suggests:
     testthat (>= 3.0.0),
+    DBI,
+    duckdb,
+    digest,
     mockery,
     knitr,
     rmarkdown
