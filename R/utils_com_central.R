@@ -19,16 +19,16 @@
 #'     que deve conter os nomes em formato de texto.}
 #'   }
 #'
-#'   A função gerencia automaticamente a conexão com o banco de dados,
-#'   garantindo que ela seja fechada ao final da execução, mesmo que ocorra
+#'   A fun\ç\ão gerencia automaticamente a conex\ão com o banco de dados,
+#'   garantindo que ela seja fechada ao final da execu\ç\ão, mesmo que ocorra
 #'   um erro.
 #'
 #' @param nomes Um vetor de caracteres (character vector) contendo os nomes
 #'   ou hashes a serem consultados.
-#' @param mestre Uma string com o caminho para o diretório do banco de dados
+#' @param mestre Uma string com o caminho para o banco de dados
 #'   DuckDB (arquivo `.duckdb`).
-#' @param usar_hash Lógico. Se \code{TRUE} (padrão), a consulta será feita na
-#'   coluna \code{'nome_original_hash'}. Se \code{FALSE}, a consulta será
+#' @param usar_hash Logico. Se \code{TRUE} (default), a consulta vai ser feita na
+#'   coluna \code{'nome_original_hash'}. Se \code{FALSE}, a consulta vai ser
 #'   feita na coluna \code{'nome_original'}.
 #'
 #' @return Um \code{data.frame} contendo os resultados da consulta. Se nenhum
@@ -60,42 +60,46 @@
 
 consulta_nome_em_central <- 
   \(nomes, 
-    mestre ,
-    usar_hash = TRUE) {
+     mestre ,
+     usar_hash = TRUE) {
     
-    # --- INÍCIO DA VERIFICAÇÃO DE DEPENDÊNCIA ---
+    
+    if ( length(nomes)==0) {
+      return(data.frame())
+    }
+    # --- IN\u00cdCIO DA VERIFICA\u00c7\u00c3O DE DEPEND\u00caNCIA ---
     if (!requireNamespace("duckdb", quietly = TRUE)) {
       stop(
-        "O pacote 'duckdb' é necessário para esta função, mas não está instalado. ",
+        "O pacote 'duckdb' \u00e9 necess\u00e1rio para esta fun\u00e7\u00e3o, mas n\u00e3o est\u00e1 instalado. ",
         "Por favor, instale-o com: install.packages('duckdb')",
-        call. = FALSE # Evita mostrar a chamada da função na mensagem de erro
+        call. = FALSE # Evita mostrar a chamada da fun\u00e7\u00e3o na mensagem de erro
       )
     }
     if (!requireNamespace("DBI", quietly = TRUE)) {
       stop(
-        "O pacote 'DBI' é necessário para esta função, mas não está instalado. ",
+        "O pacote 'DBI' \u00e9 necess\u00e1rio para esta fun\u00e7\u00e3o, mas n\u00e3o est\u00e1 instalado. ",
         "Por favor, instale-o com: install.packages('DBI')",
-        call. = FALSE # Evita mostrar a chamada da função na mensagem de erro
+        call. = FALSE # Evita mostrar a chamada da fun\u00e7\u00e3o na mensagem de erro
       )
     }
-    # --- FIM DA VERIFICAÇÃO ---
+    # --- FIM DA VERIFICA\u00c7\u00c3O ---
     
     # Conecta ao banco de dados DuckDB
     conexao <- duckdb::dbConnect(duckdb::duckdb(), dbdir = mestre)
     
-    # Garante que a conexão será fechada ao sair da função, mesmo com erros
+    # Garante que a conex\u00e3o ser\u00e1 fechada ao sair da fun\u00e7\u00e3o, mesmo com erros
     on.exit(DBI::dbDisconnect(conexao, shutdown = TRUE))
     
-    # Define a coluna de busca com base no parâmetro usar_hash
+    # Define a coluna de busca com base no par\u00e2metro usar_hash
     if (usar_hash) {
       coluna <- 'nome_original_hash'
     } else {
       coluna <- 'nome_original'
     }
     
-    # Função interna para construir e executar a consulta SQL
+    # Fun\u00e7\u00e3o interna para construir e executar a consulta SQL
     consulta1 <- \(w) { 
-      # Cria a lista de placeholders (?, ?, ...) para a cláusula IN
+      # Cria a lista de placeholders (?, ?, ...) para a cl\u00e1usula IN
       elementos <- paste(rep("?", length(w)), collapse = ", ")
       
       # Monta a string da consulta SQL de forma segura
@@ -106,7 +110,7 @@ consulta_nome_em_central <-
           elementos, ")"
         )
       
-      # Executa a consulta passando os parâmetros de forma segura
+      # Executa a consulta passando os par\u00e2metros de forma segura
       a <- DBI::dbGetQuery(conexao,
                            consulta,
                            params = as.list(w))

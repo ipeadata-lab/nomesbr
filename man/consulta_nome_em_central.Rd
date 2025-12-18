@@ -10,11 +10,11 @@ consulta_nome_em_central(nomes, mestre, usar_hash = TRUE)
 \item{nomes}{Um vetor de caracteres (character vector) contendo os nomes
 ou hashes a serem consultados.}
 
-\item{mestre}{Uma string com o caminho para o diretório do banco de dados
+\item{mestre}{Uma string com o caminho para o banco de dados
 DuckDB (arquivo `.duckdb`).}
 
-\item{usar_hash}{Lógico. Se \code{TRUE} (padrão), a consulta será feita na
-coluna \code{'nome_original_hash'}. Se \code{FALSE}, a consulta será
+\item{usar_hash}{Logico. Se \code{TRUE} (default), a consulta vai ser feita na
+coluna \code{'nome_original_hash'}. Se \code{FALSE}, a consulta vai ser
 feita na coluna \code{'nome_original'}.}
 }
 \value{
@@ -43,8 +43,8 @@ A função se conecta a um banco de dados DuckDB especificado pelo
     que deve conter os nomes em formato de texto.}
   }
 
-  A função gerencia automaticamente a conexão com o banco de dados,
-  garantindo que ela seja fechada ao final da execução, mesmo que ocorra
+  A fun\ç\ão gerencia automaticamente a conex\ão com o banco de dados,
+  garantindo que ela seja fechada ao final da execu\ç\ão, mesmo que ocorra
   um erro.
 }
 \examples{

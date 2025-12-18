@@ -16,7 +16,7 @@ test_that("consulta_nome_em_central funciona corretamente com hash MD5", {
     CREATE TABLE nomes_limpos (
       id INTEGER PRIMARY KEY,
       nome_original VARCHAR,
-      nome_original_hash BIGINT, -- md5_number retorna um BIGINT
+      nome_original_hash UINT128, -- md5_number retorna um UINT128
       categoria VARCHAR
     )
   ")
@@ -32,7 +32,7 @@ test_that("consulta_nome_em_central funciona corretamente com hash MD5", {
   
   # 4. AGORA, usar o próprio DuckDB para calcular e preencher a coluna de hash.
   #    Isso simula perfeitamente o seu processo de ETL.
-  duckdb::dbExecute(con_teste, "
+  DBI::dbExecute(con_teste, "
     UPDATE nomes_limpos
     SET nome_original_hash = md5_number(nome_original)
   ")
@@ -49,11 +49,11 @@ test_that("consulta_nome_em_central funciona corretamente com hash MD5", {
   # Vamos recriar no disco para simplificar e garantir isolamento.
   
   con_temp <- duckdb::dbConnect(duckdb::duckdb(), dbdir = mestre_temp)
-  duckdb::dbExecute(con_temp, "
+  DBI::dbExecute(con_temp, "
     CREATE TABLE nomes_limpos (
       id INTEGER PRIMARY KEY,
       nome_original VARCHAR,
-      nome_original_hash BIGINT,
+      nome_original_hash UINT128,
       categoria VARCHAR
     )
   ")
