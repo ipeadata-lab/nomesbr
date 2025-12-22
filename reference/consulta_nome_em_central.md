@@ -19,13 +19,13 @@ consulta_nome_em_central(nomes, mestre, usar_hash = TRUE)
 
 - mestre:
 
-  Uma string com o caminho para o diretório do banco de dados DuckDB
-  (arquivo \`.duckdb\`).
+  Uma string com o caminho para o banco de dados DuckDB (arquivo
+  \`.duckdb\`).
 
 - usar_hash:
 
-  Lógico. Se `TRUE` (padrão), a consulta será feita na coluna
-  `'nome_original_hash'`. Se `FALSE`, a consulta será feita na coluna
+  Logico. Se `TRUE` (default), a consulta vai ser feita na coluna
+  `'nome_original_hash'`. Se `FALSE`, a consulta vai ser feita na coluna
   `'nome_original'`.
 
 ## Value
@@ -50,8 +50,8 @@ O parâmetro \`usar_hash\` permite escolher a coluna para a busca:
 - Se `FALSE`, a busca é feita na coluna `'nome_original'`, que deve
   conter os nomes em formato de texto.
 
-A função gerencia automaticamente a conexão com o banco de dados,
-garantindo que ela seja fechada ao final da execução, mesmo que ocorra
+A fun\ç\ão gerencia automaticamente a conex\ão com o banco de dados,
+garantindo que ela seja fechada ao final da execu\ç\ão, mesmo que ocorra
 um erro.
 
 ## Examples

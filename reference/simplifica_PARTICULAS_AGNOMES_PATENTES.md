@@ -32,8 +32,8 @@ dt_nomes <- data.table::data.table(nome = c("JOAO DA SILVA FILHO",
 "CORONEL JACINTO"))
 dt_nomes <- simplifica_PARTICULAS_AGNOMES_PATENTES(d=dt_nomes,s="nome")
 #> 0. Making copy of dataset and add the s2(the var to be cleaned): 0.001 sec elapsed
-#> 1. remove particles e da de do(s): 0.001 sec elapsed
-#> 2. Detect and remove AGNOMES and titles: 0.002 sec elapsed
+#> 1. remove particles e da de do(s): 0 sec elapsed
+#> 2. Detect and remove AGNOMES and titles: 0.001 sec elapsed
 #> Starting - All substeps: 0.004 sec elapsed
 print(dt_nomes)
 #>                   nome  nome_simp agnomes_titulos

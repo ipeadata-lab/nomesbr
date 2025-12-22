@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   nomesbr: nomesbr.html
-last_built: 2025-12-12T21:46Z
+last_built: 2025-12-22T14:55Z
 urls:
   reference: https://ipeadata-lab.github.io/nomesbr/reference
   article: https://ipeadata-lab.github.io/nomesbr/articles
