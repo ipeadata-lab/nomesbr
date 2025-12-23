@@ -41,7 +41,7 @@ servem como base para a função
 , que retorna uma tabela resumo dos problemas detectados e ações tomadas
 no sentido da limpeza de nomes.
 
-## Nota [![Ipea](reference/figures/ipea_logo.png)](https://www.ipea.gov.br)
+## Nota [![Ipea](figures/ipea_logo.png)](https://www.ipea.gov.br)
 
 **nomesbr** é desenvolvido por uma equipe de pesquisadores do Instituto
 de Pesquisa Econômica Aplicada (Ipea).
