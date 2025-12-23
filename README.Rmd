@@ -6,7 +6,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-"
+  fig.path = "inst/figures/README-"
 )
 ```
 <!-- badges: start -->
@@ -65,7 +65,7 @@ como necessários e realizados.
  para a função `tabular_problemas_em_nomes()` , que retorna uma tabela resumo 
  dos problemas detectados e ações tomadas no sentido da limpeza de nomes.
 
-## Nota <a href="https://www.ipea.gov.br"><img src="man/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>
+## Nota <a href="https://www.ipea.gov.br"><img src="inst/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>
 
 **nomesbr** é desenvolvido por uma equipe de pesquisadores do Instituto
 de Pesquisa Econômica Aplicada (Ipea).

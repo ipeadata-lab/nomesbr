@@ -64,7 +64,7 @@ como base para a função `tabular_problemas_em_nomes()` , que retorna uma
 tabela resumo dos problemas detectados e ações tomadas no sentido da
 limpeza de nomes.
 
-## Nota <a href="https://www.ipea.gov.br"><img src="man/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>
+## Nota <a href="https://www.ipea.gov.br"><img src="inst/figures/ipea_logo.png" alt="Ipea" align="right" width="300"/></a>
 
 **nomesbr** é desenvolvido por uma equipe de pesquisadores do Instituto
 de Pesquisa Econômica Aplicada (Ipea).
