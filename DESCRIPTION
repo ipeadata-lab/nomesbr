@@ -36,12 +36,14 @@ Imports:
     dplyr,
     httr2,
     stringr,
+    stringdist,
     tictoc
 Suggests:
     testthat (>= 3.0.0),
     DBI,
     duckdb,
     digest,
+    metaphonebr,
     mockery,
     knitr,
     rmarkdown
