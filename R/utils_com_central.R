@@ -162,9 +162,9 @@ consulta_nome_em_central <-
 
 calcular_similaridade_nomes <- \(nome1, nome2) {
   
-  nome1_clean <- nomesbr::limpar_nomes(data.table(nome=nome1),'nome')$nome_clean
+  nome1_clean <- nomesbr::limpar_nomes(data.table::data.table(nome=nome1),'nome')$nome_clean
   
-  nome2_clean <-nomesbr::limpar_nomes(data.table(nome=nome2),'nome')$nome_clean
+  nome2_clean <-nomesbr::limpar_nomes(data.table::data.table(nome=nome2),'nome')$nome_clean
   # Verifica se o pacote metaphonebr está disponível
   if (requireNamespace("metaphonebr", quietly = TRUE)) {
     nome1_clean <- metaphonebr::metaphonebr(nome1_clean,verbose = F)
@@ -176,7 +176,7 @@ calcular_similaridade_nomes <- \(nome1, nome2) {
     print("Pacote metaphonebr inexistente localmente, aplicando apenas limpeza de nomesbr")
   }
   
-  print(paste('nomes limpos',nome1_clean,'comparado com',nome2_clean))
+  #print(paste('nomes limpos',nome1_clean,'comparado com',nome2_clean))
   
   # Combinação ponderada de distâncias
   jarowinkler <- stringdist::stringsim(nome1_clean, nome2_clean, method = "jw")
@@ -237,8 +237,8 @@ sugerir_correcao_nomes <- \(nome_alvo, lista_nomes, threshold_adaptativo = TRUE)
   if (threshold_adaptativo) {
     
     # Threshold baseado no comprimento do nome
-    nome_alvo <- data.table("nome"=nome_alvo)
-    comprimento <- nchar(limpar_nomes(nome_alvo,"nome"))
+    nome_alvo <- data.table::data.table("nome"=nome_alvo)
+    comprimento <- nchar(nomesbr::limpar_nomes(nome_alvo,"nome"))
     
     threshold <- ifelse(comprimento <= 5, 0.85, 
                         
@@ -246,7 +246,7 @@ sugerir_correcao_nomes <- \(nome_alvo, lista_nomes, threshold_adaptativo = TRUE)
     
   } else {
     
-    threshold <- 0.80 # Default conservador
+    threshold <- 0.85 # Default conservador
     
   }
   
@@ -258,110 +258,133 @@ sugerir_correcao_nomes <- \(nome_alvo, lista_nomes, threshold_adaptativo = TRUE)
   
   
   
-  return(data.frame(sugestao = sugestoes, similaridade = scores))
+  return(
+    data.table::setorder(
+      data.table::data.table(sugestao = sugestoes, similaridade = scores),
+      -similaridade)
+  )
   
 }
 
-#' Busca otimizada de nomes similares
-#'
-#' Realiza busca eficiente de nomes similares em grandes volumes de dados,
-#' utilizando pré-filtragem fonética e limitando o número de candidatos.
-#'
-#' @param nome_alvo Nome alvo para busca (character)
-#' @param vetor_nomes Vetor de nomes onde buscar (character vector)
-#' @param max_candidates Número máximo de candidatos a considerar (default = 1000)
-#'
-#' @return Um data.frame com colunas 'nome_original', 'sugestao' e 'similaridade'
-#'         ordenado por similaridade decrescente, filtrado por similaridade >= 0.75
-#'
-#' @details
-#' A função utiliza uma estratégia de dois estágios:
-#' \itemize{
-#'   \item Primeiro filtro fonético usando códigos Metaphone
-#'   \item Cálculo detalhado de similaridade apenas para candidatos pré-selecionados
-#' }
-#'
-#' @examples
-#' buscar_similares_otimizado("Francisco", c("Francisco", "Fran", "Franscisco", "Francisko"))
-#' buscar_similares_otimizado("Maria", c("Ana", "João", "Pedro"), max_candidates = 50)
-#'
-#' @export
-
-#3. Otimização para Grandes Volumes
 
 
-# Usando seu metaphonebr para pré-filtragem
-buscar_similares_otimizado <- \(nome_alvo, vetor_nomes, max_candidates = 1000) {
+#' Busca otimizada de nomes similares contando com índice reverso
+#' 
+#' 
+#' @import data.table
+#' @import duckdb
+#' @import DBI
+#' @import stringdist
+#' @import stringi
+
+buscar_similares_indice <- \(nome,n_candidatos = 2000,
+                             limite_similaridade=0.85,
+                             indice='dic_palavras_metaphone.duckdb',
+                             central='nomes_limpos_master.duckdb') {
   
+  #A) CONFIGURAÇÃO INICIAL
   
-  # Verifica se o pacote metaphonebr está disponível
-  if (requireNamespace("metaphonebr", quietly = TRUE)) {
-  
-  
-  # Primeiro filtro fonético
-  metaphone_alvo <- metaphonebr::metaphonebr(nome_alvo)
-  
-  metaphones_db <- metaphonebr::metaphonebr(vetor_nomes)
-  
-  
-  
-  # Candidatos com mesmo código fonético
-  candidatos_foneticos <- which(metaphones_db == metaphone_alvo)
-  
-  
-  
-  if (length(candidatos_foneticos) == 0) {
-    
-    # Fallback: busca por similaridade fonética
-    
-    similaridade_fonetica <- stringdist::stringsim(metaphone_alvo, metaphones_db, method = "jw")
-    
-    candidatos_foneticos <- which(similaridade_fonetica >= 0.7)
-    
-  }
-  } else {
-    # Fallback: busca por similaridade fonética
-    
-    similaridade_fonetica <- stringdist::stringsim(nome_alvo, vetor_nomes, method = "jw")
-    
-    candidatos_foneticos <- which(similaridade_fonetica >= 0.7)  
-  }
+  #1. Conexão ao índice de 'palavras' metaphone
+  con <- DBI::dbConnect(duckdb::duckdb(),indice)
   
   
   
-  # Limita candidatos para eficiência
-  candidatos <- utils::head(candidatos_foneticos, max_candidates)
+  #2. Anexa Dados de central de nomes (somente leitura por segurança)
+  DBI::dbExecute(con,paste0("ATTACH '",central,"' AS central_de_nomes_db (READ_ONLY)"))
   
-  
-  
-  # Calcula similaridade detalhada apenas para candidatos
-  if (length(candidatos) > 0) {
-    
-    similaridades <- sapply(vetor_nomes[candidatos], \(x) {
-      
-      calcular_similaridade_nomes(nome_alvo, x)
-      
+  on.exit({
+    DBI::dbExecute(con,'DETACH central_de_nomes_db')
+    DBI::dbDisconnect(con, shutdown = TRUE)
     })
-    
-    
-    
-    return(data.frame(
-      
-      "nome_original" = nome_alvo,
-      
-      "sugestao" = vetor_nomes[candidatos],
-      
-      "similaridade" = similaridades
-      
-    ) |> dplyr::filter("similaridade" >= 0.75) |> dplyr::arrange(dplyr::desc("similaridade")))
-    
-  }
+  #3. Validação (opcional)
+  #print(DBI::dbGetQuery(con,"SELECT table_name FROM information_schema.tables"))
+  
+  #B) limpeza de nome
+  
+  nome_limpo <- metaphonebr::metaphonebr(nome)
   
   
+  nome_palavras <- unlist(stringi::stri_extract_all_words(nome_limpo))
   
-  return(data.frame())
+  ##Se vazio, parar a retornar nada
+  if(length(nome_palavras) == 0) return(data.table::data.table())
+  
+  #C) Obtenção de candidatos
+  #Consulta ao índice reverso para qualquer ID com os tokens/palavras
+  sql_palavras <- paste(paste0("'",nome_palavras,"'"), collapse = ",")
+  
+  
+  ## Consulta para:
+  #  1. Filtrar palavras
+  #  2. UNNEST -> para formato long , permitindo contagem de ocorrências de id
+  #  3. GROUP BY id -> agrupa pelo hash do nome
+  #  4. COUNT(*)
+  #  5. ORDER DESC -> prioridade para aqueles com maior número de matches
+  ##IMPORTANTE - transformar ints de 128bit para string antes de chegar ao R
+  ## com x::VARCHAR
+  
+  consulta_candidatos <- sprintf("
+                                 WITH ocorrencias_brutas AS (
+                                 SELECT unnest(ids) as id
+                                 FROM indice_palavras_metaphone
+                                 WHERE palavra IN (%s)
+                                 )
+                                 SELECT id::VARCHAR as id_str,
+                                 COUNT(*) palavras_encontradas
+                                 FROM ocorrencias_brutas
+                                 GROUP BY id
+                                 ORDER BY palavras_encontradas DESC
+                                 LIMIT %d
+                                 ", sql_palavras,n_candidatos)
+  
+  candidatos_classificados <- data.table::setDT(DBI::dbGetQuery(con,consulta_candidatos))
+  
+  ##Se vazio, parar a retornar nada
+  if(nrow(candidatos_classificados) == 0) return(data.table::data.table())
+  
+  
+  #D) recuperar nomes completos dos candidatos
+  ids_candidatos <- candidatos_classificados$id_str
+  
+  consulta_ids <- paste(paste0("'",ids_candidatos,"'"),collapse=",")
+  
+  consulta_nomes <- sprintf("
+                            SELECT nome_original_hash::VARCHAR as id, nome_original, nome_metaphonebr
+                            FROM central_de_nomes_db.nomes_limpos
+                            WHERE nome_original_hash IN (%s)
+                            ", consulta_ids)
+  
+  #Resultado é um data.table com id, nome completo e nome metaphone
+  dt_candidatos <- data.table::setDT(DBI::dbGetQuery(con,consulta_nomes))
+  
+  ##Para debug juntar com score de tokens
+  dt_candidatos <- merge(
+    dt_candidatos,
+    candidatos_classificados,
+    by.x="id",
+    by.y="id_str"
+  )
+  
+  #E) Re-rankeamento por similaridade
+  
+  
+  #encontrados <- sugerir_correcao_nomes(nome_limpo,dt_candidatos$nome_metaphonebr)
+  dt_candidatos[,similaridade:= calcular_similaridade_nomes(nome_limpo,nome_metaphonebr)]
+  
+  ##Filtrar pelo threshold
+  encontrados <-  dt_candidatos[similaridade>=limite_similaridade]
+  
+  data.table::setorder(encontrados,-similaridade)
+  
+  return(encontrados)
+  
   
 }
+
+
+
+
+
 
 
 
@@ -416,7 +439,7 @@ processamento_lote <- \(vetor_nomes, chunk_size = 10000) {
     
     chunk_result <- lapply(chunk, \(nome) {
       
-      buscar_similares_otimizado(nome, nomes_unicos)
+      buscar_similares_indice(nome, nomes_unicos)
       
     })
     
